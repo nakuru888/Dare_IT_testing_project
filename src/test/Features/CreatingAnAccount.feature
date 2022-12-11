@@ -2,7 +2,7 @@ Feature: Creating an account on Software testing board webpage
 
   Scenario Outline: Creating new customer account
 
-    Given User is on "https://magento.softwaretestingboard.com/"
+    Given New user is on "https://magento.softwaretestingboard.com/"
 
     When User clicks on Create an Account in the top menu bar
 
