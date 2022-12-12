@@ -11,9 +11,8 @@ public class MyAccountPage {
         this.driver = driver;
     }
 
-    public void confirmationOfRegistration () {
-        WebElement welcomeName = driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[1]"));
-        String firstLastName = "Ala Kowalska";
-        String userName = welcomeName.getText();
+    public String confirmationOfRegistration () {
+        WebElement welcomeName = driver.findElement(By.xpath("/html/body/div[2]/header/div[1]/div/ul/li[1]/span"));
+        return welcomeName.getText();
     }
 }

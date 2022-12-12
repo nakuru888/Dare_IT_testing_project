@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.asynchttpclient.util.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.CreateAnAccountPage;
@@ -49,8 +50,7 @@ public class CreateNewAccountSteps {
     @Then("User account has been created nad user is logged into his account")
     public void user_account_has_been_created_nad_user_is_logged_into_his_account() {
         MyAccountPage onMyAccountPage = new MyAccountPage(driver);
-        onMyAccountPage.confirmationOfRegistration();
-        Assertions.assertEquals(firstLastName, userName);
+        Assert.assertEquals("Welcome, Ola Kot!", onMyAccountPage.confirmationOfRegistration());
 
     }
 

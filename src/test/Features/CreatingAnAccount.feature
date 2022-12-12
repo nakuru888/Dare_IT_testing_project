@@ -14,5 +14,7 @@ Feature: Creating an account on Software testing board webpage
 
     Examples:
     |firstname  |lastname     |email            |password       |confirmPassword  |
-    |Ala        | Kowalska    |ala.k@wp.pl      |Password!1     |Password!1       |
+#    |Ala        | Kowalska    |ala.k@wp.pl      |Password!1     |Password!1       |
 #    |Kacper     | Tuk         |kacper.t@wp.pl   |Password!2     |Password!2       |
+#    |Marcin    | Bak     |marcin.b@wp.pl   |Password!3     |Password!3       |
+    |Ola  | Kot   |ola.k@wp.pl   |Password!4     |Password!4       |
