@@ -1,0 +1,54 @@
+package pagesA;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class CreateAccountPageA {
+    @FindBy(id = "firstname")
+    private WebElement firstNameInput;
+
+    @FindBy(id = "lastname")
+    private WebElement lastNameInput;
+
+    @FindBy(id = "email_address")
+    private WebElement emailInput;
+
+    @FindBy(id = "password")
+    private WebElement passwordInput;
+
+    @FindBy(id = "password-confirmation")
+    private WebElement confirmPasswordInput;
+
+    @FindBy(className = "submit")
+    private WebElement createAccountButton;
+
+    private final WebDriver driver;
+
+    public CreateAccountPageA(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        //linijka 31 staly element?
+    }
+
+    public UserPanel fillInCreateAccountForm(String firstname, String lastname, String email, String password) {
+        fillInInputField(firstNameInput, firstname);
+        fillInInputField(lastNameInput, lastname);
+        fillInInputField(emailInput, email);
+        fillInInputField(passwordInput, password);
+        fillInInputField(confirmPasswordInput, password);
+        createAccountButton.click();
+
+        return new UserPanel(driver);
+        //ta linijka?
+
+    }
+
+    private void fillInInputField(WebElement element, String dataToEnter) {
+        element.click();
+        element.clear();
+        element.sendKeys(dataToEnter);
+    }
+
+}

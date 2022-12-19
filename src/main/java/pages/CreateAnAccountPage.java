@@ -8,16 +8,16 @@ import static java.lang.Thread.*;
 
 public class CreateAnAccountPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public CreateAnAccountPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void fillInTheForm (String firstname, String lastname, String email, String password, String confirmPassword) throws InterruptedException {
+    public void fillInTheForm(String firstname, String lastname, String email, String password, String confirmPassword) throws InterruptedException {
         WebElement firstNameF = driver.findElement(By.id("firstname"));
         WebElement lastNameF = driver.findElement(By.id("lastname"));
-        WebElement emailF= driver.findElement(By.name("email"));
+        WebElement emailF = driver.findElement(By.name("email"));
         WebElement passwordF = driver.findElement(By.name("password"));
         WebElement confirmPasswordF = driver.findElement(By.name("password_confirmation"));
 
@@ -47,11 +47,10 @@ public class CreateAnAccountPage {
 
     }
 
-    public void createAnAccountButton () {
+    public void createAnAccountButton() {
         WebElement clickButton = driver.findElement(By.xpath("//*[@id=\"form-validate\"]/div/div[1]/button/span"));
         clickButton.click();
     }
-
 
 
 }
