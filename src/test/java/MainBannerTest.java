@@ -1,15 +1,15 @@
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Homepage;
-import pages.Loginpage;
 
 import java.time.Duration;
 
-public class LoginTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class MainBannerTest {
 
     private WebDriver driver;
 
@@ -19,21 +19,24 @@ public class LoginTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://magento.softwaretestingboard.com/");
+        driver.get("https://magento.softwaretestingboard.com");
     }
 
     @Test
-    public void loginPage_LoginWithValidCredentials_Success() {
-        //given
-        Loginpage loginpageA = new Homepage(driver).openLoginPage();
+    public void homepage_verifyingCorrectTextContentOfMainBanner() {
 
+        //given
+        Homepage homepageA = new Homepage(driver);
 
         //when
-        Homepage homepageA = loginpageA.loginWithEmailAndPassword("ala.k@wp.pl", "Password!1");
-
+        homepageA.getMainBannerTopText();
+        homepageA.getMainBannerMainText();
+        homepageA.getMainBannerButtonText();
 
         //then
-        Assertions.assertThat(homepageA.getWelcomeText()).isEqualTo("Welcome, Ala Kowalska!");
+        assertThat(homepageA.getMainBannerTopText()).isEqualTo("New Luma Yoga Collection");
+        assertThat(homepageA.getMainBannerMainText()).isEqualTo("Get fit and look fab in new seasonal styles");
+        assertThat(homepageA.getMainBannerButtonText()).isEqualTo("Shop New Yoga");
 
 
     }

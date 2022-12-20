@@ -1,11 +1,11 @@
-package pagesA;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CreateAccountPageA {
+public class CreateAccountPage {
     @FindBy(id = "firstname")
     private WebElement firstNameInput;
 
@@ -26,10 +26,10 @@ public class CreateAccountPageA {
 
     private final WebDriver driver;
 
-    public CreateAccountPageA(WebDriver driver) {
+    public CreateAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        //linijka 31 staly element?
+
     }
 
     public UserPanel fillInCreateAccountForm(String firstname, String lastname, String email, String password) {
@@ -41,7 +41,6 @@ public class CreateAccountPageA {
         createAccountButton.click();
 
         return new UserPanel(driver);
-        //ta linijka?
 
     }
 

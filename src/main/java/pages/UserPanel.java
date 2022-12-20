@@ -1,10 +1,10 @@
-package pagesA;
+package pages;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static utilsA.WaitUtilsA.waitUntilElementsIsPresented;
+import static utils.WaitUtils.waitUntilElementsIsPresented;
 
 @Getter
 public class UserPanel {
@@ -19,5 +19,5 @@ public class UserPanel {
         waitUntilElementsIsPresented(driver, pageTitle, 5);
         return driver.findElement(pageTitle).getText();
     }
-    //co tutaj sie dzieje - co to jest Getter, co on robi i po co ta metoda?
+
 }
