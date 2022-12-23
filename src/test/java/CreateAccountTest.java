@@ -35,11 +35,10 @@ public class CreateAccountTest {
         //when
         UserPanel userpanel = new CreateAccountPage(driver).fillInCreateAccountForm(firstname,lastname,email,"sdfsd@##4sD");
 
-
         //then
         assertThat(userpanel.getPageTitle()).isEqualTo("My Account");
-
     }
+
     @AfterClass
     public void tearDown(){
         driver.quit();

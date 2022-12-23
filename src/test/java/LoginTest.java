@@ -5,7 +5,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Homepage;
-import pages.Loginpage;
+import pages.LoginPage;
+
 
 import java.time.Duration;
 
@@ -24,18 +25,15 @@ public class LoginTest {
 
     @Test
     public void loginPage_LoginWithValidCredentials_Success() {
-        //given
-        Loginpage loginpageA = new Homepage(driver).openLoginPage();
 
+        //given
+        LoginPage loginpage = new Homepage(driver).openLoginPage();
 
         //when
-        Homepage homepageA = loginpageA.loginWithEmailAndPassword("ala.k@wp.pl", "Password!1");
-
+        Homepage homepage = loginpage.loginWithEmailAndPassword("ala.k@wp.pl", "Password!1");
 
         //then
-        Assertions.assertThat(homepageA.getWelcomeText()).isEqualTo("Welcome, Ala Kowalska!");
-
-
+        Assertions.assertThat(homepage.getWelcomeText()).isEqualTo("Welcome, Ala Kowalska!");
     }
 
     @AfterClass

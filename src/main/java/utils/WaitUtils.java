@@ -9,10 +9,10 @@ import java.time.Duration;
 
 public class WaitUtils {
     public static void waitUntilElementsIsPresented(WebDriver driver, By locator, int durationInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(durationInSeconds));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-
     }
+
     public static void waitUntilElementContainsText(WebDriver driver, By locator, String textToContain) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToContain));

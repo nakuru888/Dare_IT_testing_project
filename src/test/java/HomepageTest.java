@@ -1,7 +1,9 @@
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.Homepage;
 
@@ -9,7 +11,7 @@ import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MainBannerTest {
+public class HomepageTest {
 
     private WebDriver driver;
 
@@ -22,23 +24,23 @@ public class MainBannerTest {
         driver.get("https://magento.softwaretestingboard.com");
     }
 
+    @BeforeMethod
+    public void beforeMethod(){
+        driver.get("https://magento.softwaretestingboard.com/");
+    }
+
     @Test
-    public void homepage_verifyingCorrectTextContentOfMainBanner() {
+    public void homepage_MainBanner_HasTextAndButtonCorrectlyDisplayed() {
 
         //given
-        Homepage homepageA = new Homepage(driver);
-
-        //when
-        homepageA.getMainBannerTopText();
-        homepageA.getMainBannerMainText();
-        homepageA.getMainBannerButtonText();
+        Homepage homepage = new Homepage(driver);
 
         //then
-        assertThat(homepageA.getMainBannerTopText()).isEqualTo("New Luma Yoga Collection");
-        assertThat(homepageA.getMainBannerMainText()).isEqualTo("Get fit and look fab in new seasonal styles");
-        assertThat(homepageA.getMainBannerButtonText()).isEqualTo("Shop New Yoga");
-
-
+        assertThat(homepage.getMainBannerTopText()).isEqualTo("New Luma Yoga Collection");
+        assertThat(homepage.getMainBannerMainText()).isEqualTo("Get fit and look fab in new seasonal styles");
+        assertThat(homepage.getMainBannerButtonText()).isEqualTo("Shop New Yoga");
+        //
+        // assertThat(driver.getCurrentUrl()).contains("https://magento.softwaretestingboard.com/collections/yoga-new.html");
     }
 
     @AfterClass

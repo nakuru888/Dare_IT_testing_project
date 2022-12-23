@@ -1,9 +1,12 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import static utils.WaitUtils.waitUntilElementContainsText;
 
 public class CreateAccountPage {
     @FindBy(id = "firstname")
@@ -24,12 +27,14 @@ public class CreateAccountPage {
     @FindBy(className = "submit")
     private WebElement createAccountButton;
 
+    @FindBy(className = "page-title")
+    private WebElement pageTitle;
+
     private final WebDriver driver;
 
     public CreateAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
     }
 
     public UserPanel fillInCreateAccountForm(String firstname, String lastname, String email, String password) {
@@ -39,9 +44,7 @@ public class CreateAccountPage {
         fillInInputField(passwordInput, password);
         fillInInputField(confirmPasswordInput, password);
         createAccountButton.click();
-
         return new UserPanel(driver);
-
     }
 
     private void fillInInputField(WebElement element, String dataToEnter) {
@@ -50,4 +53,9 @@ public class CreateAccountPage {
         element.sendKeys(dataToEnter);
     }
 
+    public String getPageTitle() {
+        return pageTitle.getText();
+    }
+
 }
+
