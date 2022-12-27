@@ -25,7 +25,6 @@ public class LoginTest {
 
     @Test
     public void loginPage_LoginWithValidCredentials_Success() {
-
         //given
         LoginPage loginpage = new Homepage(driver).openLoginPage();
 
@@ -40,4 +39,5 @@ public class LoginTest {
     public void tearDown() {
         driver.quit();
     }
+
 }

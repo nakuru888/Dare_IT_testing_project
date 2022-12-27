@@ -30,7 +30,6 @@ public class PanelHeaderLinkTest {
 
     @Test
     public void panelHeader_SignInLink_NavigatesToLoginPage() {
-
         //given
         Homepage homepage = new Homepage(driver);
 
@@ -44,7 +43,6 @@ public class PanelHeaderLinkTest {
 
     @Test
     public void panelHeader_CreateAccountLink_NavigatesToLoginPage() {
-
         //given
         Homepage homepage = new Homepage(driver);
 
@@ -52,7 +50,7 @@ public class PanelHeaderLinkTest {
         CreateAccountPage createAccountPage = homepage.openCreateAccountPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(("https://magento.softwaretestingboard.com/customer/account/create/"));
+        Assertions.assertThat(driver.getCurrentUrl()).contains("https://magento.softwaretestingboard.com/customer/account/create/");
         Assertions.assertThat(createAccountPage.getPageTitle()).isEqualTo("Create New Customer Account");
     }
 
@@ -60,4 +58,5 @@ public class PanelHeaderLinkTest {
     public void tearDown(){
         driver.quit();
     }
+
 }

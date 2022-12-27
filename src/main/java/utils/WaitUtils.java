@@ -18,4 +18,4 @@ public class WaitUtils {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToContain));
     }
 
- }
+}
