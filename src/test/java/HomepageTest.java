@@ -33,10 +33,10 @@ public class HomepageTest {
         assertThat(homepage.getMainBannerTopText()).isEqualTo("New Luma Yoga Collection");
         assertThat(homepage.getMainBannerMainText()).isEqualTo("Get fit and look fab in new seasonal styles");
         assertThat(homepage.getMainBannerButtonText()).isEqualTo("Shop New Yoga");
-        assertThat(driver.findElement(By.cssSelector(".blocks-promo>:first-child")).getAttribute("href")).
-                contains("https://magento.softwaretestingboard.com/collections/yoga-new.html");
-        assertThat(driver.findElement(By.cssSelector(".blocks-promo>:first-child img")).getAttribute("src")).
-                contains("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-main.jpg");
+        assertThat(driver.findElement(By.cssSelector(".blocks-promo > a")).getAttribute("href")).
+                isEqualTo("https://magento.softwaretestingboard.com/collections/yoga-new.html");
+        assertThat(driver.findElement(By.cssSelector(".blocks-promo > a img")).getAttribute("src")).
+                isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-main.jpg");
     }
 
     @AfterClass
