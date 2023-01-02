@@ -7,14 +7,15 @@ import org.openqa.selenium.support.Color;
 
 public class LoginPage {
     private final By emailInputBy = By.id("email");
-    private final By passwordInputBy = By.id("pass");
-    private final By signInButton = By.id("send2");
+    private final By passwordInputBy = By.cssSelector(".page-wrapper #pass");
+    private final By signInButton = By.cssSelector(".page-wrapper #send2");
     private final By pageTitle = By.className("page-title");
-    private final By registeredCustomerText = By.cssSelector(".page-wrapper [id=block-customer-login-heading]");
+    private final By registeredCustomerText = By.cssSelector(".page-wrapper #block-customer-login-heading");
     private final By singInInstructionText = By.cssSelector(".fieldset.login .field.note");
-    private final By emailLabel = By.cssSelector(".field.email.required .label[for='email'] ");
+    private final By loginFormContainer = By.cssSelector(".login-container .block-customer-login #login-form");
+    private final By emailLabel = By.cssSelector(".page-wrapper .field.email.required .label");
     private final By passwordLabel = By.cssSelector(".page-wrapper .field.password.required .label");
-    private final By forgotYourPassword = By.cssSelector(".secondary .action.remind");
+    private final By forgotYourPasswordLinkText = By.cssSelector(".secondary .action.remind");
 
     private final WebDriver driver;
 
@@ -40,11 +41,7 @@ public class LoginPage {
     }
 
     public boolean isTextPageTitleDisplayed() {
-        if (driver.findElement(pageTitle).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(pageTitle).isDisplayed();
     }
 
     public String getRegisteredCustomerText() {
@@ -52,11 +49,7 @@ public class LoginPage {
     }
 
     public boolean isTextRegisteredCustomerDisplayed() {
-        if (driver.findElement(registeredCustomerText).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(registeredCustomerText).isDisplayed();
     }
 
     public String getSingInInstructionText() {
@@ -64,11 +57,11 @@ public class LoginPage {
     }
 
     public boolean isTextSingInInstructionDisplayed() {
-        if (driver.findElement(singInInstructionText).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(singInInstructionText).isDisplayed();
+    }
+
+    public boolean isLoginFormContainer(){
+        return driver.findElement(loginFormContainer).isDisplayed();
     }
 
     public String getEmailLabel() {
@@ -76,11 +69,7 @@ public class LoginPage {
     }
 
     public boolean isTextEmailLabelDisplayed() {
-        if (driver.findElement(emailLabel).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(emailLabel).isDisplayed();
     }
 
     public String getPasswordLabel() {
@@ -88,11 +77,7 @@ public class LoginPage {
     }
 
     public boolean isTextPasswordLabelDisplayed() {
-        if (driver.findElement(passwordLabel).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(passwordLabel).isDisplayed();
     }
 
     public String getSignInButtonText() {
@@ -100,35 +85,33 @@ public class LoginPage {
     }
 
     public boolean isSignInButtonEnabled() {
-        if (driver.findElement(signInButton).isEnabled()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(signInButton).isEnabled();
     }
 
-    public String getForgotYourPassword() {
-        return driver.findElement(forgotYourPassword).getText();
+    public String getForgotYourPasswordLinkText() {
+        return driver.findElement(forgotYourPasswordLinkText).getText();
     }
 
     public boolean isTextForgotYourPasswordDisplayed() {
-        if (driver.findElement(forgotYourPassword).isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.findElement(forgotYourPasswordLinkText).isDisplayed();
     }
 
-    public String verifySignInButtonColor() {
-        WebElement SignInButton = driver.findElement(signInButton);
-        String ButtonColorRgba = SignInButton.getCssValue("background-color");
-        String SiginInButtonColorHex = Color.fromString(ButtonColorRgba).asHex();
-        return SiginInButtonColorHex;
+    public String getForgotYourPasswordLinkTextColorAsHex() {
+        WebElement signInButtonColor = driver.findElement(forgotYourPasswordLinkText);
+        String forgotYourPasswordTextLinkRgba = signInButtonColor.getCssValue("color");
+        return Color.fromString(forgotYourPasswordTextLinkRgba).asHex();
     }
 
-    public ForgotYourPasswordPage openForgotYourPasswordPage() {
-        driver.findElement(forgotYourPassword).click();
-        return new ForgotYourPasswordPage(driver);
+    public String getSignInButtonBackgroundColorAsHex() {
+        WebElement signInButtonColor = driver.findElement(signInButton);
+        String buttonColorBackgroundRgba = signInButtonColor.getCssValue("background-color");
+        return Color.fromString(buttonColorBackgroundRgba).asHex();
+    }
+
+    public String getSignInButtonFontColorAsHex() {
+        WebElement signInButtonColor = driver.findElement(signInButton);
+        String buttonColorFontRgba = signInButtonColor.getCssValue("color");
+        return Color.fromString(buttonColorFontRgba).asHex();
     }
 }
 
