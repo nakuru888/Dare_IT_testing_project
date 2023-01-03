@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 
+import static utils.WaitUtils.waitUntilElementContainsText;
+
 public class LoginPage {
     private final By emailInputBy = By.id("email");
     private final By passwordInputBy = By.cssSelector(".page-wrapper #pass");
@@ -17,6 +19,17 @@ public class LoginPage {
     private final By passwordLabel = By.cssSelector(".page-wrapper .field.password.required .label");
     private final By forgotYourPasswordLink = By.cssSelector(".secondary .action.remind");
 
+    private final By pageHeader = By.className("page-header");
+    private final By pageNavigationBar = By.className("navigation");
+    private final By pageFooter = By.cssSelector(".page-footer");
+    private final By newCustomerContainer = By. cssSelector(".page-wrapper .block.block-new-customer");
+    private final By newCustomersTitle = By.cssSelector(".page-wrapper  #block-new-customer-heading");
+    private final By newCustomersMainText = By.cssSelector(".page-wrapper .block-content > p");
+    private final By createAccountButton = By.cssSelector(".login-container .block-new-customer .actions-toolbar a.action.primary");
+    private final By tryDemoCustomerAccessSection = By.cssSelector(".widget.block.block-static-block .message.info");
+    private final By tryDemoCustomerAccessTitle = By.cssSelector(".page-wrapper .message.info strong");
+    private final By tryDemoCustomerAccessEmail = By.cssSelector(".page-wrapper .message.info p:nth-child(2)");
+    private final By tryDemoCustomerAccessPassword = By.cssSelector(".page-wrapper .message.info p:nth-child(3)");
     private final WebDriver driver;
 
     public LoginPage(WebDriver driver) {
@@ -113,5 +126,101 @@ public class LoginPage {
         String buttonColorFontRgba = signInButtonElement.getCssValue("color");
         return Color.fromString(buttonColorFontRgba).asHex();
     }
+
+    public boolean isPageHeaderDisplayed(){
+        return driver.findElement(pageHeader).isDisplayed();
+    }
+
+    public boolean isPageNavigationBarDisplayed(){
+        return driver.findElement(pageNavigationBar).isDisplayed();
+    }
+
+    public boolean isPageFooterDisplayed(){
+        return driver.findElement(pageFooter).isDisplayed();
+    }
+
+    public boolean isNewCustomerContainerDisplayed(){
+        return driver.findElement(newCustomerContainer).isDisplayed();
+    }
+
+    public boolean isTryDemoCustomerAccessSectionDisplayed(){
+        return driver.findElement(tryDemoCustomerAccessSection).isDisplayed();
+    }
+
+    public boolean isNewCustomersTitleDisplayed(){
+        return driver.findElement(newCustomersTitle).isDisplayed();
+    }
+
+    public String getNewCustomersTitleText() {
+        return driver.findElement(newCustomersTitle).getText();
+    }
+
+    public boolean isNewCustomersMainTextDisplayed(){
+        return driver.findElement(newCustomersMainText).isDisplayed();
+    }
+
+    public String getNewCustomersMainText() {
+        return driver.findElement(newCustomersMainText).getText();
+    }
+
+    public boolean isCreateAccountButtonEnabled(){
+        return driver.findElement(createAccountButton).isDisplayed();
+    }
+
+    public String getCreateAccountButtonText() {
+        return driver.findElement(createAccountButton).getText();
+    }
+
+    public boolean isTryDemoCustomerAccessTitleDisplayed(){
+        return driver.findElement(tryDemoCustomerAccessTitle).isDisplayed();
+    }
+
+    public String getTryDemoCustomerAccessTitleText() {
+        return driver.findElement(tryDemoCustomerAccessTitle).getText();
+    }
+
+    public boolean isTryDemoCustomerAccessEmailDisplayed(){
+        return driver.findElement(tryDemoCustomerAccessEmail).isDisplayed();
+    }
+
+    public String getTryDemoCustomerAccessEmailText() {
+        return driver.findElement(tryDemoCustomerAccessEmail).getText();
+    }
+
+    public boolean isTryDemoCustomerAccessPasswordDisplayed(){
+        return driver.findElement(tryDemoCustomerAccessPassword).isDisplayed();
+    }
+
+    public String getTryDemoCustomerAccessPasswordText(){
+        return driver.findElement(tryDemoCustomerAccessPassword).getText();
+    }
+
+    public String getCreateAccountButtonFontColorAsHex() {
+        WebElement createAccountButtonElement = driver.findElement(createAccountButton);
+        String createAccountButtonColorFontRgba = createAccountButtonElement.getCssValue("color");
+        return Color.fromString(createAccountButtonColorFontRgba).asHex();
+    }
+
+    public String getCreateAccountButtonBackgroundColorAsHex(){
+        WebElement createAccountButtonElement = driver.findElement(createAccountButton);
+        waitUntilElementContainsText(driver,createAccountButton,"Create an Account");
+        String createAccountButtonColorBackgroundRgba = createAccountButtonElement.getCssValue("background");
+        return Color.fromString(createAccountButtonColorBackgroundRgba).asHex();
+    }
+
+    public String getTryDemoCustomerAccessSectionBackgroundColorAsHex(){
+        WebElement tryDemoCustomerAccessSectionElement = driver.findElement(tryDemoCustomerAccessSection);
+        String tryDemoCustomerAccessSectionBackgroundRgba = tryDemoCustomerAccessSectionElement.getCssValue("background");
+        return Color.fromString(tryDemoCustomerAccessSectionBackgroundRgba).asHex();
+    }
+
+    public String getTryDemoCustomerAccessSectionFontColorAsHex(){
+        WebElement tryDemoCustomerAccessSectionElement = driver.findElement(tryDemoCustomerAccessSection);
+        String tryDemoCustomerAccessSectionFontRgba = tryDemoCustomerAccessSectionElement.getCssValue("font");
+        return  Color.fromString(tryDemoCustomerAccessSectionFontRgba).asHex();
+    }
+
+
+
 }
 

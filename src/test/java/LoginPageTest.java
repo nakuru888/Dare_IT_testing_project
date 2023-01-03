@@ -60,6 +60,60 @@ public class LoginPageTest {
         softAssertions.assertAll();
     }
 
+    @Test
+    public void loginPage_HeaderFooterNavigationDemoCustomer_AreSectionsCorrectlyDisplayed() {
+        //given
+        LoginPage loginPage = new LoginPage(driver);
+
+        //when
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(loginPage.isPageHeaderDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.isPageNavigationBarDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.isPageFooterDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.isNewCustomerContainerDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.isTryDemoCustomerAccessSectionDisplayed()).isTrue();
+        softAssertions.assertAll();
+    }
+
+    @Test
+    public void loginPage_NewCustomerSection_HasTitleAndTextAndButtonCorrectlyDisplayed() {
+        //given
+        LoginPage loginPage = new LoginPage(driver);
+
+        //when
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(loginPage.isNewCustomersTitleDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.getNewCustomersTitleText()).isEqualTo("New Customers");
+        softAssertions.assertThat(loginPage.isNewCustomersMainTextDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.getNewCustomersMainText()).
+                isEqualTo("Creating an account has many benefits: check out faster, keep more than one address, track orders and more.");
+        softAssertions.assertThat(loginPage.isCreateAccountButtonEnabled()).isTrue();
+        softAssertions.assertThat(loginPage.getCreateAccountButtonText()).isEqualTo("Create an Account");
+        softAssertions.assertThat(driver.findElement(By.cssSelector(".action.create.primary")).getAttribute("href")).
+                isEqualTo("https://magento.softwaretestingboard.com/customer/account/create/");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo("#ffffff");
+        //softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
+        softAssertions.assertAll();
+    }
+
+    @Test
+    public void loginPage_DemoCustomerCredentialSection_HasTitleAndTextAndEmailAndPasswordCorrectlyDisplayed() {
+        //given
+        LoginPage loginPage = new LoginPage(driver);
+
+        //when
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(loginPage.isTryDemoCustomerAccessTitleDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessTitleText()).isEqualTo("Try Demo Customer Access");
+        softAssertions.assertThat(loginPage.isTryDemoCustomerAccessEmailDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessEmailText()).isEqualTo("Email:roni_cost@example.com");
+        softAssertions.assertThat(loginPage.isTryDemoCustomerAccessPasswordDisplayed()).isTrue();
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessPasswordText()).isEqualTo("Password:roni_cost3@example.com");
+        //softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionBackgroundColorAsHex()).isEqualTo("#fdf0d5");
+        //softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionFontColorAsHex()).isEqualTo("#6f4400");
+        softAssertions.assertAll();
+    }
+
     @AfterClass
     public void tearDown() {
         driver.quit();
