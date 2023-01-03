@@ -23,7 +23,7 @@ public class LoginPageTest {
     }
 
     @Test
-    public void loginPage_PageTitle_isPageTitleCorrectlyDisplayed() {
+    public void loginPage_PageTitle_HasPageTitleCorrectlyDisplayed() {
         //given
         LoginPage loginPage = new LoginPage(driver);
 
@@ -43,7 +43,7 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.getRegisteredCustomerText()).isEqualTo("Registered Customers");
         softAssertions.assertThat(loginPage.isTextSingInInstructionDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getSingInInstructionText()).isEqualTo("If you have an account, sign in with your email address.");
-        softAssertions.assertThat(loginPage.isLoginFormContainer()).isTrue();
+        softAssertions.assertThat(loginPage.isLoginFormContainerDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.isTextEmailLabelDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getEmailLabel()).isEqualTo("Email");
         softAssertions.assertThat(loginPage.isTextPasswordLabelDisplayed()).isTrue();

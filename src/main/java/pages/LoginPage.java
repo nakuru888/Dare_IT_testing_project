@@ -10,12 +10,12 @@ public class LoginPage {
     private final By passwordInputBy = By.cssSelector(".page-wrapper #pass");
     private final By signInButton = By.cssSelector(".page-wrapper #send2");
     private final By pageTitle = By.className("page-title");
-    private final By registeredCustomerText = By.cssSelector(".page-wrapper #block-customer-login-heading");
-    private final By singInInstructionText = By.cssSelector(".fieldset.login .field.note");
+    private final By registeredCustomerSectionTitle = By.cssSelector(".page-wrapper #block-customer-login-heading");
+    private final By singInInstruction = By.cssSelector(".fieldset.login .field.note");
     private final By loginFormContainer = By.cssSelector(".login-container .block-customer-login #login-form");
     private final By emailLabel = By.cssSelector(".page-wrapper .field.email.required .label");
     private final By passwordLabel = By.cssSelector(".page-wrapper .field.password.required .label");
-    private final By forgotYourPasswordLinkText = By.cssSelector(".secondary .action.remind");
+    private final By forgotYourPasswordLink = By.cssSelector(".secondary .action.remind");
 
     private final WebDriver driver;
 
@@ -45,22 +45,22 @@ public class LoginPage {
     }
 
     public String getRegisteredCustomerText() {
-        return driver.findElement(registeredCustomerText).getText();
+        return driver.findElement(registeredCustomerSectionTitle).getText();
     }
 
     public boolean isTextRegisteredCustomerDisplayed() {
-        return driver.findElement(registeredCustomerText).isDisplayed();
+        return driver.findElement(registeredCustomerSectionTitle).isDisplayed();
     }
 
     public String getSingInInstructionText() {
-        return driver.findElement(singInInstructionText).getText();
+        return driver.findElement(singInInstruction).getText();
     }
 
     public boolean isTextSingInInstructionDisplayed() {
-        return driver.findElement(singInInstructionText).isDisplayed();
+        return driver.findElement(singInInstruction).isDisplayed();
     }
 
-    public boolean isLoginFormContainer(){
+    public boolean isLoginFormContainerDisplayed(){
         return driver.findElement(loginFormContainer).isDisplayed();
     }
 
@@ -89,28 +89,28 @@ public class LoginPage {
     }
 
     public String getForgotYourPasswordLinkText() {
-        return driver.findElement(forgotYourPasswordLinkText).getText();
+        return driver.findElement(forgotYourPasswordLink).getText();
     }
 
     public boolean isTextForgotYourPasswordDisplayed() {
-        return driver.findElement(forgotYourPasswordLinkText).isDisplayed();
+        return driver.findElement(forgotYourPasswordLink).isDisplayed();
     }
 
     public String getForgotYourPasswordLinkTextColorAsHex() {
-        WebElement signInButtonColor = driver.findElement(forgotYourPasswordLinkText);
-        String forgotYourPasswordTextLinkRgba = signInButtonColor.getCssValue("color");
+        WebElement forgotYourPasswordLinkElement = driver.findElement(forgotYourPasswordLink);
+        String forgotYourPasswordTextLinkRgba = forgotYourPasswordLinkElement.getCssValue("color");
         return Color.fromString(forgotYourPasswordTextLinkRgba).asHex();
     }
 
     public String getSignInButtonBackgroundColorAsHex() {
-        WebElement signInButtonColor = driver.findElement(signInButton);
-        String buttonColorBackgroundRgba = signInButtonColor.getCssValue("background-color");
+        WebElement signInButtonElement = driver.findElement(signInButton);
+        String buttonColorBackgroundRgba = signInButtonElement.getCssValue("background-color");
         return Color.fromString(buttonColorBackgroundRgba).asHex();
     }
 
     public String getSignInButtonFontColorAsHex() {
-        WebElement signInButtonColor = driver.findElement(signInButton);
-        String buttonColorFontRgba = signInButtonColor.getCssValue("color");
+        WebElement signInButtonElement = driver.findElement(signInButton);
+        String buttonColorFontRgba = signInButtonElement.getCssValue("color");
         return Color.fromString(buttonColorFontRgba).asHex();
     }
 }
