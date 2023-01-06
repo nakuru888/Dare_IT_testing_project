@@ -1,6 +1,5 @@
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -55,8 +54,7 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.isTextForgotYourPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkText()).isEqualTo("Forgot Your Password?");
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkTextColorAsHex()).isEqualTo("#006bb4");
-        softAssertions.assertThat(driver.findElement(By.cssSelector(".secondary .action.remind")).getAttribute("href")).
-                isEqualTo("https://magento.softwaretestingboard.com/customer/account/forgotpassword/");
+        softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/forgotpassword/");
         softAssertions.assertAll();
     }
 
@@ -89,10 +87,9 @@ public class LoginPageTest {
                 isEqualTo("Creating an account has many benefits: check out faster, keep more than one address, track orders and more.");
         softAssertions.assertThat(loginPage.isCreateAccountButtonEnabled()).isTrue();
         softAssertions.assertThat(loginPage.getCreateAccountButtonText()).isEqualTo("Create an Account");
-        softAssertions.assertThat(driver.findElement(By.cssSelector(".action.create.primary")).getAttribute("href")).
-                isEqualTo("https://magento.softwaretestingboard.com/customer/account/create/");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/create/");
         softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo("#ffffff");
-        //softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
         softAssertions.assertAll();
     }
 
@@ -109,8 +106,8 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.getTryDemoCustomerAccessEmailText()).isEqualTo("Email:roni_cost@example.com");
         softAssertions.assertThat(loginPage.isTryDemoCustomerAccessPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getTryDemoCustomerAccessPasswordText()).isEqualTo("Password:roni_cost3@example.com");
-        //softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionBackgroundColorAsHex()).isEqualTo("#fdf0d5");
-        //softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionFontColorAsHex()).isEqualTo("#6f4400");
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionBackgroundColorAsHex()).isEqualTo("#fdf0d5");
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionFontColorAsHex()).isEqualTo("#6f4400");
         softAssertions.assertAll();
     }
 

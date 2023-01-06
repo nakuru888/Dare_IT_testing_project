@@ -19,5 +19,4 @@ public class UserPanel {
         waitUntilElementsIsPresented(driver, pageTitle, 10);
         return driver.findElement(pageTitle).getText();
     }
-
 }
