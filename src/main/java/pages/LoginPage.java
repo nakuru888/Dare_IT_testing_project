@@ -216,5 +216,12 @@ public class LoginPage {
     public String getTryDemoCustomerAccessSectionFontColorAsHex() {
         return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.COLOR);
     }
+
+    public LoginPage loginWithInvalidEmailAndPassword(String email, String password) {
+        fillInInputField(driver.findElement(emailInputBy), email);
+        fillInInputField(driver.findElement(passwordInputBy),password);
+        driver.findElement(signInButton).click();
+        return this;
+    }
 }
 
