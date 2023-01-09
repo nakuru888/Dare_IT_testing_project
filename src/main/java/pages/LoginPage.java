@@ -1,7 +1,7 @@
 package pages;
 
-import Enums.Attribute;
-import Enums.CssProperty;
+import enums.Attribute;
+import enums.CssProperty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +20,7 @@ public class LoginPage {
     private final By emailLabel = By.cssSelector(".page-wrapper .field.email.required .label");
     private final By passwordLabel = By.cssSelector(".page-wrapper .field.password.required .label");
     private final By forgotYourPasswordLink = By.cssSelector(".secondary .action.remind");
+
     private final By pageHeader = By.className("page-header");
     private final By pageNavigationBar = By.className("navigation");
     private final By pageFooter = By.cssSelector(".page-footer");
@@ -116,15 +117,15 @@ public class LoginPage {
     }
 
     public String getForgotYourPasswordLinkTextColorAsHex() {
-        return getColorAsHex(driver, forgotYourPasswordLink, CssProperty.COLOR.getPropertyName());
+        return getColorAsHex(driver, forgotYourPasswordLink, CssProperty.COLOR);
     }
 
     public String getSignInButtonBackgroundColorAsHex() {
-        return getColorAsHex(driver, signInButton, CssProperty.BACKGROUND_COLOR.getPropertyName());
+        return getColorAsHex(driver, signInButton, CssProperty.BACKGROUND_COLOR);
     }
 
     public String getSignInButtonFontColorAsHex() {
-        return getColorAsHex(driver, signInButton, CssProperty.COLOR.getPropertyName());
+        return getColorAsHex(driver, signInButton, CssProperty.COLOR);
     }
 
     public boolean isPageHeaderDisplayed() {
@@ -200,20 +201,20 @@ public class LoginPage {
     }
 
     public String getCreateAccountButtonFontColorAsHex() {
-        return getColorAsHex(driver, createAccountButton, CssProperty.COLOR.getPropertyName());
+        return getColorAsHex(driver, createAccountButton, CssProperty.COLOR);
     }
 
     public String getCreateAccountButtonBackgroundColorAsHex() {
         waitUntilElementsIsPresented(driver, createAccountButton, 5);
-        return getColorAsHex(driver, createAccountButton, CssProperty.BACKGROUND_COLOR.getPropertyName());
+        return getColorAsHex(driver, createAccountButton, CssProperty.BACKGROUND_COLOR);
     }
 
     public String getTryDemoCustomerAccessSectionBackgroundColorAsHex() {
-        return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.BACKGROUND_COLOR.getPropertyName());
+        return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.BACKGROUND_COLOR);
     }
 
     public String getTryDemoCustomerAccessSectionFontColorAsHex() {
-        return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.COLOR.getPropertyName());
+        return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.COLOR);
     }
 }
 
