@@ -12,6 +12,12 @@ import java.time.Duration;
 public class LoginPageTest {
     private WebDriver driver;
 
+    private static final String WHITE_COLOR = "#ffffff";
+    private static final String BLUE_COLOR = "#1979c3";
+    private static final String LIGHT_BLUE_COLOR = "#006bb4";
+    private static final String BROWN_COLOR = "#6f4400";
+    private static final String LIGHT_PINK_COLOR = "#fdf0d5";
+
     @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
@@ -49,11 +55,11 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.getPasswordLabel()).isEqualTo("Password");
         softAssertions.assertThat(loginPage.isSignInButtonEnabled()).isTrue();
         softAssertions.assertThat(loginPage.getSignInButtonText()).isEqualTo("Sign In");
-        softAssertions.assertThat(loginPage.getSignInButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
-        softAssertions.assertThat(loginPage.getSignInButtonFontColorAsHex()).isEqualTo("#ffffff");
+        softAssertions.assertThat(loginPage.getSignInButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
+        softAssertions.assertThat(loginPage.getSignInButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
         softAssertions.assertThat(loginPage.isTextForgotYourPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkText()).isEqualTo("Forgot Your Password?");
-        softAssertions.assertThat(loginPage.getForgotYourPasswordLinkTextColorAsHex()).isEqualTo("#006bb4");
+        softAssertions.assertThat(loginPage.getForgotYourPasswordLinkTextColorAsHex()).isEqualTo(LIGHT_BLUE_COLOR);
         softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/forgotpassword/");
         softAssertions.assertAll();
     }
@@ -88,8 +94,8 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.isCreateAccountButtonEnabled()).isTrue();
         softAssertions.assertThat(loginPage.getCreateAccountButtonText()).isEqualTo("Create an Account");
         softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/create/");
-        softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo("#ffffff");
-        softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
+        softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
         softAssertions.assertAll();
     }
 
@@ -106,8 +112,8 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.getTryDemoCustomerAccessEmailText()).isEqualTo("Email:roni_cost@example.com");
         softAssertions.assertThat(loginPage.isTryDemoCustomerAccessPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getTryDemoCustomerAccessPasswordText()).isEqualTo("Password:roni_cost3@example.com");
-        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionBackgroundColorAsHex()).isEqualTo("#fdf0d5");
-        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionFontColorAsHex()).isEqualTo("#6f4400");
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionBackgroundColorAsHex()).isEqualTo(LIGHT_PINK_COLOR);
+        softAssertions.assertThat(loginPage.getTryDemoCustomerAccessSectionFontColorAsHex()).isEqualTo(BROWN_COLOR);
         softAssertions.assertAll();
     }
 

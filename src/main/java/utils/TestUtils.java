@@ -11,7 +11,7 @@ public class TestUtils {
         return randomString(numberOfCharacters, ASCII_LETTERS);
     }
 
-    public static String randomString(int numberCount, CharacterPredicate characterPredicate) {
+    private static String randomString(int numberCount, CharacterPredicate characterPredicate) {
         var generator = new RandomStringGenerator.Builder().filteredBy(characterPredicate).build();
         return generator.generate(numberCount);
     }
