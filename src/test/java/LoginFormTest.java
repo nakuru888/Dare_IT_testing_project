@@ -1,5 +1,4 @@
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -13,8 +12,20 @@ import pages.LoginPage;
 import java.time.Duration;
 
 public class LoginFormTest {
-
     private WebDriver driver;
+
+    private static final String ERROR_MESSAGE_INCORRECT_SIGN_IN = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.";
+    private static final String ERROR_MESSAGE_INCORRECT_SIGN_IN_CAPTCHA = "Incorrect CAPTCHA";
+    private static final String ERROR_MESSAGE_REQUIRED_FIELD = "This is a required field.";
+    private static final String ERROR_MESSAGE_INCORRECT_EMAIL_FORMAT = "Please enter a valid email address (Ex: johndoe@domain.com).";
+    private static final String VALID_EMAIL_SUCCESS_LOGIN = "ala.k@wp.pl";
+    private static final String VALID_EMAIL_FAILURE_LOGIN = "bela.k@wp.pl";
+    private static final String VALID_PASSWORD = "Password!1";
+    private static final String INVALID_EMAIL = "xxx@test.pl";
+    private static final String INVALID_PASSWORD = "XXX123";
+    private static final String EMPTY_EMAIL = "";
+    private static final String EMPTY_PASSWORD = "";
+    private static final String INCORRECT_EMAIL_FORMAT = "test123";
 
     @BeforeClass
     public void setUp() {
@@ -31,81 +42,76 @@ public class LoginFormTest {
 
     @Test
     public void loginPage_LoginWithValidCredentials_Success() {
-        //given
-        LoginPage loginpage = new Homepage(driver).openLoginPage();
-
         //when
-        Homepage homepage = loginpage.loginWithEmailAndPassword("ala.k@wp.pl", "Password!1");
+        Homepage homepage = new LoginPage(driver).loginWithEmailAndPassword(VALID_EMAIL_SUCCESS_LOGIN, VALID_PASSWORD);
 
         //then
         Assertions.assertThat(homepage.getWelcomeText()).isEqualTo("Welcome, Ala Kowalska!");
     }
 
     @Test
-    public void loginPage_LoginWithValidEmailAndInvalidPassword_FailureToLogInWithErrorMessageIncorrectSignInDisplayed(){
-        //given
-        String validEmail = "ala.k@wp.pl";
-        String invalidPassword = "XXXXX";
-
+    public void loginPage_LoginWithValidEmailAndInvalidPassword_FailureWithCorrectErrorMessageDisplayed() {
         //when
-        LoginPage loginPage = new LoginPage(driver).loginWithInvalidEmailAndPassword(validEmail, invalidPassword);
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(VALID_EMAIL_FAILURE_LOGIN, INVALID_PASSWORD);
 
         //then
-        Assertions.assertThat(driver.findElement(By.cssSelector(".message-error.error.message")).getText()).
-                isEqualTo("The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.");
-    }
-    @Test
-    public void loginPage_LoginWithInvalidEmailAndInvalidPassword_FailureToLogInWithErrorMessageIncorrectSignInDisplayed(){
-        //given
-        String invalidEmail = "test@test.pl";
-        String invalidPassword = "XXXXX";
-
-        //when
-        LoginPage loginPage = new LoginPage(driver).loginWithInvalidEmailAndPassword(invalidEmail, invalidPassword);
-
-        //then
-        Assertions.assertThat(driver.findElement(By.cssSelector(".message-error.error.message")).getText()).
-                isEqualTo("The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.");
+        Assertions.assertThat(loginPage.getErrorMessageIncorrectSignInWithCorrectEmailFormat()).isEqualTo(ERROR_MESSAGE_INCORRECT_SIGN_IN_CAPTCHA);
     }
 
     @Test
-    public void loginPage_LoginWithInvalidEmailAndEmptyPassword_FailureToLogInWithErrorMessageThisIsRequiredFieldDisplayed(){
-        //given
-        String invalidEmail = "test@test.pl";
-        String emptyPassword = "";
-
+    public void loginPage_LoginWithInvalidEmailAndInvalidPassword_FailureWithCorrectErrorMessageDisplayed() {
         //when
-        LoginPage loginPage = new LoginPage(driver).loginWithInvalidEmailAndPassword(invalidEmail, emptyPassword);
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(INVALID_EMAIL, INVALID_PASSWORD);
 
         //then
-        Assertions.assertThat(driver.findElement(By.id("pass-error")).getText()).isEqualTo("This is a required field.");
+        Assertions.assertThat(loginPage.getErrorMessageIncorrectSignInWithCorrectEmailFormat()).isEqualTo(ERROR_MESSAGE_INCORRECT_SIGN_IN_CAPTCHA);
     }
 
     @Test
-    public void loginPage_LoginWithValidEmailAndEmptyPassword_FailureToLogInWithErrorMessageThisIsRequiredFieldDisplayed(){
-        //given
-        String validEmail = "ala.k@wp.pl";
-        String emptyPassword = "";
-
+    public void loginPage_LoginWithInvalidEmailAndEmptyPassword_FailureWithCorrectErrorMessageDisplayed() {
         //when
-        LoginPage loginPage = new LoginPage(driver).loginWithInvalidEmailAndPassword(validEmail, emptyPassword);
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(INVALID_EMAIL, EMPTY_PASSWORD);
 
         //then
-        Assertions.assertThat(driver.findElement(By.id("pass-error")).getText()).isEqualTo("This is a required field.");
+        Assertions.assertThat(loginPage.getErrorMessageEmptyPasswordField()).isEqualTo(ERROR_MESSAGE_REQUIRED_FIELD);
     }
 
     @Test
-    public void loginPage_LoginWithEmptyEmailAndEmptyPassword_FailureToLogInWithErrorMessageThisIsRequiredFieldDisplayed(){
-        //given
-        String emptyEmail = "";
-        String emptyPassword = "";
-
+    public void loginPage_LoginWithValidEmailAndEmptyPassword_FailureWithCorrectErrorMessageDisplayed() {
         //when
-        LoginPage loginPage = new LoginPage(driver).loginWithInvalidEmailAndPassword(emptyEmail, emptyPassword);
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(VALID_EMAIL_FAILURE_LOGIN, EMPTY_PASSWORD);
 
         //then
-        Assertions.assertThat(driver.findElement(By.id("email-error")).getText()).isEqualTo("This is a required field.");
-        Assertions.assertThat(driver.findElement(By.id("pass-error")).getText()).isEqualTo("This is a required field.");
+        Assertions.assertThat(loginPage.getErrorMessageEmptyPasswordField()).isEqualTo(ERROR_MESSAGE_REQUIRED_FIELD);
+    }
+
+    @Test
+    public void loginPage_LoginWithEmptyEmailAndEmptyPassword_FailureWithCorrectErrorMessageDisplayed() {
+        //when
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(EMPTY_EMAIL, EMPTY_PASSWORD);
+
+        //then
+        Assertions.assertThat(loginPage.getErrorMessageEmptyEmailField()).isEqualTo(ERROR_MESSAGE_REQUIRED_FIELD);
+        Assertions.assertThat(loginPage.getErrorMessageEmptyPasswordField()).isEqualTo(ERROR_MESSAGE_REQUIRED_FIELD);
+    }
+
+    @Test
+    public void loginPage_LoginWithIncorrectEmailFormatAndEmptyPassword_FailureWithCorrectErrorMessageDisplayed() {
+        //when
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(INCORRECT_EMAIL_FORMAT, EMPTY_PASSWORD);
+
+        //then
+        Assertions.assertThat(loginPage.getErrorMessageWithIncorrectEmailFormat()).isEqualTo(ERROR_MESSAGE_INCORRECT_EMAIL_FORMAT);
+        Assertions.assertThat(loginPage.getErrorMessageEmptyPasswordField()).isEqualTo(ERROR_MESSAGE_REQUIRED_FIELD);
+    }
+
+    @Test
+    public void loginPage_LoginWithIncorrectEmailFormatAndInvalidPassword_FailureWithCorrectErrorMessageDisplayed() {
+        //when
+        LoginPage loginPage = new LoginPage(driver).tryToLoginWithEmailAndPassword(INCORRECT_EMAIL_FORMAT, INVALID_PASSWORD);
+
+        //then
+        Assertions.assertThat(loginPage.getErrorMessageWithIncorrectEmailFormat()).isEqualTo(ERROR_MESSAGE_INCORRECT_EMAIL_FORMAT);
     }
 
     @AfterClass

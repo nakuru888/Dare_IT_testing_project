@@ -32,6 +32,7 @@ public class LoginPage {
     private final By tryDemoCustomerAccessTitle = By.cssSelector(".page-wrapper .message.info strong");
     private final By tryDemoCustomerAccessEmail = By.cssSelector(".page-wrapper .message.info p:nth-child(2)");
     private final By tryDemoCustomerAccessPassword = By.cssSelector(".page-wrapper .message.info p:nth-child(3)");
+    private final By errorMessageBelowEmail = By.id("email-error");
 
     private final WebDriver driver;
 
@@ -40,9 +41,7 @@ public class LoginPage {
     }
 
     public Homepage loginWithEmailAndPassword(String email, String password) {
-        fillInInputField(driver.findElement(emailInputBy), email);
-        fillInInputField(driver.findElement(passwordInputBy), password);
-        driver.findElement(signInButton).click();
+        tryToLoginWithEmailAndPassword(email, password);
         return new Homepage(driver);
     }
 
@@ -217,11 +216,27 @@ public class LoginPage {
         return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.COLOR);
     }
 
-    public LoginPage loginWithInvalidEmailAndPassword(String email, String password) {
+    public LoginPage tryToLoginWithEmailAndPassword(String email, String password) {
         fillInInputField(driver.findElement(emailInputBy), email);
-        fillInInputField(driver.findElement(passwordInputBy),password);
+        fillInInputField(driver.findElement(passwordInputBy), password);
         driver.findElement(signInButton).click();
         return this;
+    }
+
+    public String getErrorMessageIncorrectSignInWithCorrectEmailFormat() {
+        return driver.findElement(By.cssSelector(".message-error.error.message")).getText();
+    }
+
+    public String getErrorMessageWithIncorrectEmailFormat() {
+        return driver.findElement(By.id("email-error")).getText();
+    }
+
+    public String getErrorMessageEmptyPasswordField() {
+        return driver.findElement(By.id("pass-error")).getText();
+    }
+
+    public String getErrorMessageEmptyEmailField() {
+        return driver.findElement(By.id("email-error")).getText();
     }
 }
 
