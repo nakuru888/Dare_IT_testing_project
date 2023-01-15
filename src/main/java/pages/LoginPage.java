@@ -10,8 +10,9 @@ import static utils.ColorUtils.getColorAsHex;
 import static utils.WaitUtils.waitUntilElementsIsPresented;
 
 public class LoginPage {
-    private final By emailInputBy = By.id("email");
-    private final By passwordInputBy = By.cssSelector(".page-wrapper #pass");
+    private final By loginFormInput = By.cssSelector(".page-wrapper .field.required");
+    private final By emailInput = By.id("email");
+    private final By passwordInput = By.cssSelector(".page-wrapper #pass");
     private final By signInButton = By.cssSelector(".page-wrapper #send2");
     private final By pageTitle = By.className("page-title");
     private final By registeredCustomerSectionTitle = By.cssSelector(".page-wrapper #block-customer-login-heading");
@@ -32,6 +33,9 @@ public class LoginPage {
     private final By tryDemoCustomerAccessTitle = By.cssSelector(".page-wrapper .message.info strong");
     private final By tryDemoCustomerAccessEmail = By.cssSelector(".page-wrapper .message.info p:nth-child(2)");
     private final By tryDemoCustomerAccessPassword = By.cssSelector(".page-wrapper .message.info p:nth-child(3)");
+    private final By errorMessageBanner = By.cssSelector(".message-error.error.message");
+    private final By emailInputErrorMessage = By.id("email-error");
+    private final By passwordInputErrorMessage = By.id("pass-error");
 
     private final WebDriver driver;
 
@@ -40,9 +44,7 @@ public class LoginPage {
     }
 
     public Homepage loginWithEmailAndPassword(String email, String password) {
-        fillInInputField(driver.findElement(emailInputBy), email);
-        fillInInputField(driver.findElement(passwordInputBy), password);
-        driver.findElement(signInButton).click();
+        tryToLoginWithEmailAndPassword(email, password);
         return new Homepage(driver);
     }
 
@@ -215,6 +217,32 @@ public class LoginPage {
 
     public String getTryDemoCustomerAccessSectionFontColorAsHex() {
         return getColorAsHex(driver, tryDemoCustomerAccessSection, CssProperty.COLOR);
+    }
+
+    public void tryToLoginWithEmailAndPassword(String email, String password) {
+        fillInInputField(driver.findElement(emailInput), email);
+        fillInInputField(driver.findElement(passwordInput), password);
+        driver.findElement(signInButton).click();
+    }
+
+    public String getEmailInputErrorMessage() {
+        return driver.findElement(emailInputErrorMessage).getText();
+    }
+
+    public String getPasswordInputErrorMessage() {
+        return driver.findElement(passwordInputErrorMessage).getText();
+    }
+
+    public boolean isErrorMessageBannerDisplayed() {
+        return driver.findElement(errorMessageBanner).isDisplayed();
+    }
+
+    public String getErrorMessageBannerText() {
+        return driver.findElement(errorMessageBanner).getText();
+    }
+
+    public int getLoginFormInputsSize(){
+        return driver.findElements(loginFormInput).size();
     }
 }
 

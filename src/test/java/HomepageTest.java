@@ -6,6 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Homepage;
+import utils.WebDriverUtils;
 
 import java.time.Duration;
 
@@ -17,11 +18,7 @@ public class HomepageTest {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://magento.softwaretestingboard.com");
+        driver = WebDriverUtils.createWebDriver();
     }
 
     @Test

@@ -6,6 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import utils.WebDriverUtils;
 
 import java.time.Duration;
 
@@ -20,11 +21,7 @@ public class LoginPageTest {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://magento.softwaretestingboard.com/customer/account/login/");
+        driver = WebDriverUtils.createWebDriver();
     }
 
     @Test

@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.CreateAccountPage;
 import pages.UserPanel;
+import utils.WebDriverUtils;
 
 import java.time.Duration;
 
@@ -17,11 +18,7 @@ public class CreateAccountTest {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://magento.softwaretestingboard.com/customer/account/create/");
+       driver = WebDriverUtils.createWebDriver();
     }
 
     @Test
