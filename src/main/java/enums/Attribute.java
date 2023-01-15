@@ -1,5 +1,6 @@
 package enums;
 
 public enum Attribute {
-    HREF
+    HREF,
+    SRC
 }
