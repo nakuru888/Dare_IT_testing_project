@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.Homepage;
 import pages.LoginPage;
+import utils.WaitUtils;
+import utils.WebDriverUtils;
 
 import java.time.Duration;
 
@@ -20,10 +22,7 @@ public class LoginFormTest {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver= WebDriverUtils.createWebDriver();
     }
 
     @BeforeMethod
