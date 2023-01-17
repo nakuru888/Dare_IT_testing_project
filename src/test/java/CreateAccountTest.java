@@ -1,30 +1,21 @@
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CreateAccountPage;
 import pages.UserPanel;
 import utils.WebDriverUtils;
 
-import java.time.Duration;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static utils.TestUtils.randomString;
 
 public class CreateAccountTest {
-
     private WebDriver driver;
 
     @BeforeClass
     public void setUp() {
        driver = WebDriverUtils.createWebDriver();
-    }
-
-    @BeforeMethod
-    public void beforeMethod(){
-        driver.get("https://magento.softwaretestingboard.com/customer/account/create/");
+       driver.get("https://magento.softwaretestingboard.com/customer/account/create/");
     }
 
     @Test
@@ -45,5 +36,4 @@ public class CreateAccountTest {
     public void tearDown() {
         driver.quit();
     }
-
 }

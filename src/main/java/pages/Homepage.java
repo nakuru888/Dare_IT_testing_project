@@ -4,6 +4,9 @@ import enums.Attribute;
 import enums.CssProperty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static utils.ColorUtils.getColorAsHex;
 import static utils.WaitUtils.waitUntilElementContainsText;
@@ -23,28 +26,45 @@ public class Homepage {
     private final By pantsBannerTopText = By.cssSelector(".home-pants .content .title");
     private final By pantsBannerMainText = By.cssSelector(".home-pants .content .info");
     private final By pantsBannerBottomText = By.cssSelector(".home-pants .content .action");
-    private final By pantsBannerImageSource = By.cssSelector(".block-promo.home-pants >img");
+    private final By pantsBannerImage = By.cssSelector(".block-promo.home-pants > img");
     private final By teesBanner = By.cssSelector(".block-promo.home-t-shirts");
     private final By teesBannerTopText = By.cssSelector(".block-promo.home-t-shirts .content .title");
     private final By teesBannerMainText = By.cssSelector(".block-promo.home-t-shirts .content .info");
     private final By teesBannerBottomText = By.cssSelector(".block-promo.home-t-shirts .content .action");
-    private final By teesBannerImageSource = By.cssSelector(".block-promo.home-t-shirts .image > img");
+    private final By teesBannerImage = By.cssSelector(".block-promo.home-t-shirts .image > img");
     private final By erinBanner = By.cssSelector(".block-promo.home-erin");
     private final By erinBannerTopText = By.cssSelector(".block-promo.home-erin .title");
     private final By erinBannerMainText = By.cssSelector(".block-promo.home-erin .info");
     private final By erinBannerBottomText = By.cssSelector(".block-promo.home-erin .action");
-    private final By erinBannerImageSource = By.cssSelector(".block-promo.home-erin > img");
+    private final By erinBannerImage = By.cssSelector(".block-promo.home-erin > img");
     private final By ecoFriendlyBanner = By.cssSelector(".block-promo.home-eco");
     private final By ecoFriendlyBannerTopText = By.cssSelector(".block-promo.home-eco .title");
     private final By ecoFriendlyBannerMainText = By.cssSelector(".block-promo.home-eco .info");
     private final By ecoFriendlyBannerBottomText = By.cssSelector(".block-promo.home-eco .action");
-    private final By ecoFriendlyBannerImageSource = By.cssSelector(".block-promo.home-eco >img");
+    private final By ecoFriendlyBannerImage = By.cssSelector(".block-promo.home-eco > img");
     private final By performanceBanner = By.cssSelector(".block-promo.home-performance");
     private final By performanceBannerTopText = By.cssSelector(".block-promo.home-performance .title");
     private final By performanceBannerMainText = By.cssSelector(".block-promo.home-performance .info");
     private final By performanceBannerBottomText = By.cssSelector(".block-promo.home-performance .action");
-    private final By performanceBannerImageSource = By.cssSelector(".block-promo.home-performance >img");
+    private final By performanceBannerImage = By.cssSelector(".block-promo.home-performance > img");
+    private final By hotSellersTitle = By.cssSelector(".content-heading .title");
+    private final By whatIsTrendingText = By.cssSelector(".content-heading .info");
+    private final By hotSellersProductsList = By.cssSelector(".product-items.widget-product-grid");
+    public static By hotSellersProductImage = By.className("product-image-photo");
+    public static By hotSellersProductDetails = By.className("product-item-details");
+    public static By hotSellersProductTitle = By.className("product-item-name");
 
+    public By getHotSellersProductImage() {
+        return hotSellersProductImage;
+    }
+
+    public By getHotSellersProductDetails() {
+        return hotSellersProductDetails;
+    }
+
+    public By getHotSellersProductTitle() {
+        return hotSellersProductTitle;
+    }
 
     private final WebDriver driver;
 
@@ -132,8 +152,8 @@ public class Homepage {
         return driver.findElement(pantsBanner).getAttribute(Attribute.HREF.name());
     }
 
-    public String getPantsBannerImageSource() {
-        return driver.findElement(pantsBannerImageSource).getAttribute(Attribute.SRC.name());
+    public String getPantsBannerImage() {
+        return driver.findElement(pantsBannerImage).getAttribute(Attribute.SRC.name());
     }
 
     public boolean isTeesBannerDisplayed() {
@@ -160,8 +180,8 @@ public class Homepage {
         return driver.findElement(teesBanner).getAttribute(Attribute.HREF.name());
     }
 
-    public String getTeesBannerImageSource() {
-        return driver.findElement(teesBannerImageSource).getAttribute(Attribute.SRC.name());
+    public String getTeesBannerImage() {
+        return driver.findElement(teesBannerImage).getAttribute(Attribute.SRC.name());
     }
 
     public boolean isErinBannerDisplayed() {
@@ -188,8 +208,8 @@ public class Homepage {
         return driver.findElement(erinBanner).getAttribute(Attribute.HREF.name());
     }
 
-    public String getErinBannerImageSource() {
-        return driver.findElement(erinBannerImageSource).getAttribute(Attribute.SRC.name());
+    public String getErinBannerImage() {
+        return driver.findElement(erinBannerImage).getAttribute(Attribute.SRC.name());
     }
 
     public boolean isEcoFriendlyBannerDisplayed() {
@@ -216,8 +236,8 @@ public class Homepage {
         return driver.findElement(ecoFriendlyBanner).getAttribute(Attribute.HREF.name());
     }
 
-    public String getEcoFriendlyBannerImageSource() {
-        return driver.findElement(ecoFriendlyBannerImageSource).getAttribute(Attribute.SRC.name());
+    public String getEcoFriendlyBannerImage() {
+        return driver.findElement(ecoFriendlyBannerImage).getAttribute(Attribute.SRC.name());
     }
 
     public boolean isPerformanceBannerDisplayed() {
@@ -244,7 +264,24 @@ public class Homepage {
         return driver.findElement(performanceBanner).getAttribute(Attribute.HREF.name());
     }
 
-    public String getPerformanceBannerImageSource() {
-        return driver.findElement(performanceBannerImageSource).getAttribute(Attribute.SRC.name());
+    public String getPerformanceBannerImage() {
+        return driver.findElement(performanceBannerImage).getAttribute(Attribute.SRC.name());
+    }
+
+    public boolean isHotSellersTitleDisplayed() {
+        return driver.findElement(hotSellersTitle).isDisplayed();
+    }
+    public String getHotSellersTitleText() {
+        return driver.findElement(hotSellersTitle).getText();
+    }
+
+    public boolean isWhatIsTrendingTextDisplayed() {
+        return driver.findElement(whatIsTrendingText).isDisplayed();
+    }
+    public String getWhatIsTrendingText() {
+        return driver.findElement(whatIsTrendingText).getText();
+    }
+    public List<WebElement> getHotSellersProductsList() {
+        return driver.findElements(hotSellersProductsList);
     }
 }

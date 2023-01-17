@@ -1,34 +1,31 @@
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.Homepage;
 import utils.WebDriverUtils;
 
+import java.util.List;
+
 public class HomepageTest {
-
-    private WebDriver driver;
-
     private static final String WHITE_COLOR = "#ffffff";
     private static final String BLUE_COLOR = "#1979c3";
+    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
+    private WebDriver driver;
+    private Homepage homepage;
 
     @BeforeClass
     public void setUp() {
         driver = WebDriverUtils.createWebDriver();
-    }
-
-    @BeforeMethod
-    public void beforeMethod() {
-        driver.get("https://magento.softwaretestingboard.com/");
+        driver.get(HOMEPAGE_URL);
+        homepage = new Homepage(driver);
     }
 
     @Test
     public void homepage_MainBanner_HasTextAndButtonCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isMainBannerDisplayed()).isTrue();
@@ -36,8 +33,8 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getMainBannerTopText()).isEqualTo("New Luma Yoga Collection");
         softAssertions.assertThat(homepage.getMainBannerMainText()).isEqualTo("Get fit and look fab in new seasonal styles");
         softAssertions.assertThat(homepage.getMainBannerButtonText()).isEqualTo("Shop New Yoga");
-        softAssertions.assertThat(homepage.getMainBannerLink()).isEqualTo("https://magento.softwaretestingboard.com/collections/yoga-new.html");
-        softAssertions.assertThat(homepage.getMainBannerImageSource()).isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-main.jpg");
+        softAssertions.assertThat(homepage.getMainBannerLink()).isEqualTo(HOMEPAGE_URL + "collections/yoga-new.html");
+        softAssertions.assertThat(homepage.getMainBannerImageSource()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-main.jpg");
         softAssertions.assertThat(homepage.getMainBannerButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
         softAssertions.assertThat(homepage.getMainBannerButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
         softAssertions.assertAll();
@@ -45,9 +42,6 @@ public class HomepageTest {
 
     @Test
     public void homepage_PantsBanner_HasTextAndLinkCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isPantsBannerDisplayed()).isTrue();
@@ -55,18 +49,13 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getPantsBannerTopText()).isEqualTo("20% OFF");
         softAssertions.assertThat(homepage.getPantsBannerMainText()).isEqualTo("Luma pants when you shop today*");
         softAssertions.assertThat(homepage.getPantsBannerBottomText()).isEqualTo("Shop Pants");
-        softAssertions.assertThat(homepage.getPantsBannerLink())
-                .isEqualTo("https://magento.softwaretestingboard.com/promotions/pants-all.html");
-        softAssertions.assertThat(homepage.getPantsBannerImageSource())
-                .isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-pants.jpg");
+        softAssertions.assertThat(homepage.getPantsBannerLink()).isEqualTo(HOMEPAGE_URL + "promotions/pants-all.html");
+        softAssertions.assertThat(homepage.getPantsBannerImage()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-pants.jpg");
         softAssertions.assertAll();
     }
 
     @Test
     public void homepage_TeesBanner_HasTextAndLinkCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isTeesBannerDisplayed()).isTrue();
@@ -74,18 +63,13 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getTeesBannerTopText()).isEqualTo("Even more ways to mix and match");
         softAssertions.assertThat(homepage.getTeesBannerMainText()).isEqualTo("Buy 3 Luma tees get a 4th free");
         softAssertions.assertThat(homepage.getTeesBannerBottomText()).isEqualTo("Shop Tees");
-        softAssertions.assertThat(homepage.getTeesBannerLink())
-                .isEqualTo("https://magento.softwaretestingboard.com/promotions/tees-all.html");
-        softAssertions.assertThat(homepage.getTeesBannerImageSource())
-                .isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-t-shirts.png");
+        softAssertions.assertThat(homepage.getTeesBannerLink()).isEqualTo(HOMEPAGE_URL + "promotions/tees-all.html");
+        softAssertions.assertThat(homepage.getTeesBannerImage()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-t-shirts.png");
         softAssertions.assertAll();
     }
 
     @Test
     public void homepage_ErinBanner_HasTextAndLinkCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isErinBannerDisplayed()).isTrue();
@@ -93,18 +77,13 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getErinBannerTopText()).isEqualTo("Take it from Erin");
         softAssertions.assertThat(homepage.getErinBannerMainText()).isEqualTo("Luma founder Erin Renny shares her favorites!");
         softAssertions.assertThat(homepage.getErinBannerBottomText()).isEqualTo("Shop Erin Recommends");
-        softAssertions.assertThat(homepage.getErinBannerLink())
-                .isEqualTo("https://magento.softwaretestingboard.com/collections/erin-recommends.html");
-        softAssertions.assertThat(homepage.getErinBannerImageSource())
-                .isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-erin.jpg");
+        softAssertions.assertThat(homepage.getErinBannerLink()).isEqualTo(HOMEPAGE_URL + "collections/erin-recommends.html");
+        softAssertions.assertThat(homepage.getErinBannerImage()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-erin.jpg");
         softAssertions.assertAll();
     }
 
     @Test
     public void homepage_EcoFriendlyBanner_HasTextAndLinkCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isEcoFriendlyBannerDisplayed()).isTrue();
@@ -112,18 +91,13 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getEcoFriendlyBannerTopText()).isEqualTo("Twice around, twice as nice");
         softAssertions.assertThat(homepage.getEcoFriendlyBannerMainText()).isEqualTo("Find conscientious, comfy clothing in our eco-friendly collection");
         softAssertions.assertThat(homepage.getEcoFriendlyBannerBottomText()).isEqualTo("Shop Eco-Friendly");
-        softAssertions.assertThat(homepage.getEcoFriendlyBannerLink())
-                .isEqualTo("https://magento.softwaretestingboard.com/collections/eco-friendly.html");
-        softAssertions.assertThat(homepage.getEcoFriendlyBannerImageSource())
-                .isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-eco.jpg");
+        softAssertions.assertThat(homepage.getEcoFriendlyBannerLink()).isEqualTo(HOMEPAGE_URL + "collections/eco-friendly.html");
+        softAssertions.assertThat(homepage.getEcoFriendlyBannerImage()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-eco.jpg");
         softAssertions.assertAll();
     }
 
     @Test
     public void homepage_PerformanceBanner_HasTextAndLinkCorrectlyDisplayed() {
-        //given
-        Homepage homepage = new Homepage(driver);
-
         //then
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(homepage.isPerformanceBannerDisplayed()).isTrue();
@@ -131,10 +105,27 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getPerformanceBannerTopText()).isEqualTo("Science meets performance");
         softAssertions.assertThat(homepage.getPerformanceBannerMainText()).isEqualTo("Wicking to raingear, Luma covers you");
         softAssertions.assertThat(homepage.getPerformanceBannerBottomText()).isEqualTo("Shop Performance");
-        softAssertions.assertThat(homepage.getPerformanceBannerLink())
-                .isEqualTo("https://magento.softwaretestingboard.com/collections/performance-fabrics.html");
-        softAssertions.assertThat(homepage.getPerformanceBannerImageSource())
-                .isEqualTo("https://magento.softwaretestingboard.com/pub/media/wysiwyg/home/home-performance.jpg");
+        softAssertions.assertThat(homepage.getPerformanceBannerLink()).isEqualTo(HOMEPAGE_URL + "collections/performance-fabrics.html");
+        softAssertions.assertThat(homepage.getPerformanceBannerImage()).isEqualTo(HOMEPAGE_URL + "pub/media/wysiwyg/home/home-performance.jpg");
+        softAssertions.assertAll();
+    }
+
+    @Test
+    public void homepage_HotSellers_HasTextAndLinkCorrectlyDisplayed() {
+        //given
+        List<WebElement> hotSellerProductsWebElementList = homepage.getHotSellersProductsList();
+
+        //then
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(homepage.isHotSellersTitleDisplayed()).isTrue();
+        softAssertions.assertThat(homepage.isWhatIsTrendingTextDisplayed()).isTrue();
+        softAssertions.assertThat(homepage.getHotSellersTitleText()).isEqualTo("Hot Sellers");
+        softAssertions.assertThat(homepage.getWhatIsTrendingText()).isEqualTo("Here is what`s trending on Luma right now");
+        for (WebElement element : hotSellerProductsWebElementList) {
+            Assertions.assertThat(element.findElement(homepage.getHotSellersProductImage()).isDisplayed()).isTrue();
+            Assertions.assertThat(element.findElement(homepage.getHotSellersProductDetails()).isDisplayed()).isTrue();
+            Assertions.assertThat(element.findElement(homepage.getHotSellersProductTitle()).isDisplayed()).isTrue();
+        }
         softAssertions.assertAll();
     }
 

@@ -1,6 +1,5 @@
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -10,10 +9,8 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
-import java.time.Duration;
-
 public class PanelHeaderLinkTest {
-
+    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
     private WebDriver driver;
 
     @BeforeClass
@@ -22,8 +19,7 @@ public class PanelHeaderLinkTest {
     }
 
     @BeforeMethod
-    public void beforeMethod() {
-        driver.get("https://magento.softwaretestingboard.com/");
+    public void beforeMethod() {driver.get(HOMEPAGE_URL);
     }
 
     @Test
@@ -35,7 +31,7 @@ public class PanelHeaderLinkTest {
         LoginPage loginPage = homepage.openLoginPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains("https://magento.softwaretestingboard.com/customer/account/login/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/login/");
         Assertions.assertThat(loginPage.getPageTitle()).isEqualTo("Customer Login");
     }
 
@@ -48,7 +44,7 @@ public class PanelHeaderLinkTest {
         CreateAccountPage createAccountPage = homepage.openCreateAccountPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains("https://magento.softwaretestingboard.com/customer/account/create/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/create/");
         Assertions.assertThat(createAccountPage.getPageTitle()).isEqualTo("Create New Customer Account");
     }
 
@@ -56,5 +52,4 @@ public class PanelHeaderLinkTest {
     public void tearDown(){
         driver.quit();
     }
-
 }
