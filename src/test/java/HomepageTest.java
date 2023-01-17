@@ -1,4 +1,3 @@
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,8 @@ import utils.WebDriverUtils;
 
 import java.util.List;
 
-public class HomepageTest {
+public class
+HomepageTest {
     private static final String WHITE_COLOR = "#ffffff";
     private static final String BLUE_COLOR = "#1979c3";
     private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
@@ -111,7 +111,7 @@ public class HomepageTest {
     }
 
     @Test
-    public void homepage_HotSellers_HasTextAndLinkCorrectlyDisplayed() {
+    public void homepage_HotSellers_HasTextAndTrendingProductsCorrectlyDisplayed() {
         //given
         List<WebElement> hotSellerProductsWebElementList = homepage.getHotSellersProductsList();
 
@@ -122,9 +122,9 @@ public class HomepageTest {
         softAssertions.assertThat(homepage.getHotSellersTitleText()).isEqualTo("Hot Sellers");
         softAssertions.assertThat(homepage.getWhatIsTrendingText()).isEqualTo("Here is what`s trending on Luma right now");
         for (WebElement element : hotSellerProductsWebElementList) {
-            Assertions.assertThat(element.findElement(homepage.getHotSellersProductImage()).isDisplayed()).isTrue();
-            Assertions.assertThat(element.findElement(homepage.getHotSellersProductDetails()).isDisplayed()).isTrue();
-            Assertions.assertThat(element.findElement(homepage.getHotSellersProductTitle()).isDisplayed()).isTrue();
+            softAssertions.assertThat(element.findElement(Homepage.HOT_SELLERS_PRODUCT_TITLE).isDisplayed()).isTrue();
+            softAssertions.assertThat(element.findElement(Homepage.HOT_SELLERS_PRODUCT_IMAGE).isDisplayed()).isTrue();
+            softAssertions.assertThat(element.findElement(Homepage.HOT_SELLERS_PRODUCT_DETAILS).isDisplayed()).isTrue();
         }
         softAssertions.assertAll();
     }

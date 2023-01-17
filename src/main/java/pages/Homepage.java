@@ -13,6 +13,9 @@ import static utils.WaitUtils.waitUntilElementContainsText;
 import static utils.WaitUtils.waitUntilElementsIsPresented;
 
 public class Homepage {
+    public final static By HOT_SELLERS_PRODUCT_IMAGE = By.className("product-image-photo");
+    public final static By HOT_SELLERS_PRODUCT_DETAILS = By.className("product-item-details");
+    public final static By HOT_SELLERS_PRODUCT_TITLE = By.className("product-item-name");
     private final By createAccountHeaderLink = By.cssSelector(".panel.header .header.links li:last-child");
     private final By signInHeaderLink = By.cssSelector(".header.links .authorization-link");
     private final By welcomeText = By.className("logged-in");
@@ -50,21 +53,6 @@ public class Homepage {
     private final By hotSellersTitle = By.cssSelector(".content-heading .title");
     private final By whatIsTrendingText = By.cssSelector(".content-heading .info");
     private final By hotSellersProductsList = By.cssSelector(".product-items.widget-product-grid");
-    public static By hotSellersProductImage = By.className("product-image-photo");
-    public static By hotSellersProductDetails = By.className("product-item-details");
-    public static By hotSellersProductTitle = By.className("product-item-name");
-
-    public By getHotSellersProductImage() {
-        return hotSellersProductImage;
-    }
-
-    public By getHotSellersProductDetails() {
-        return hotSellersProductDetails;
-    }
-
-    public By getHotSellersProductTitle() {
-        return hotSellersProductTitle;
-    }
 
     private final WebDriver driver;
 
@@ -271,6 +259,7 @@ public class Homepage {
     public boolean isHotSellersTitleDisplayed() {
         return driver.findElement(hotSellersTitle).isDisplayed();
     }
+
     public String getHotSellersTitleText() {
         return driver.findElement(hotSellersTitle).getText();
     }
@@ -278,9 +267,11 @@ public class Homepage {
     public boolean isWhatIsTrendingTextDisplayed() {
         return driver.findElement(whatIsTrendingText).isDisplayed();
     }
+
     public String getWhatIsTrendingText() {
         return driver.findElement(whatIsTrendingText).getText();
     }
+
     public List<WebElement> getHotSellersProductsList() {
         return driver.findElements(hotSellersProductsList);
     }
