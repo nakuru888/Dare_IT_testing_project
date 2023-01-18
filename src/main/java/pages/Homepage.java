@@ -13,9 +13,9 @@ import static utils.WaitUtils.waitUntilElementContainsText;
 import static utils.WaitUtils.waitUntilElementsIsPresented;
 
 public class Homepage {
-    public final static By HOT_SELLERS_PRODUCT_IMAGE = By.className("product-image-photo");
-    public final static By HOT_SELLERS_PRODUCT_DETAILS = By.className("product-item-details");
-    public final static By HOT_SELLERS_PRODUCT_TITLE = By.className("product-item-name");
+    public static final By HOT_SELLERS_PRODUCT_IMAGE = By.className("product-image-photo");
+    public static final By HOT_SELLERS_PRODUCT_DETAILS = By.className("product-item-details");
+    public static final By HOT_SELLERS_PRODUCT_TITLE = By.className("product-item-name");
     private final By createAccountHeaderLink = By.cssSelector(".panel.header .header.links li:last-child");
     private final By signInHeaderLink = By.cssSelector(".header.links .authorization-link");
     private final By welcomeText = By.className("logged-in");
