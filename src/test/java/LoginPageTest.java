@@ -1,27 +1,25 @@
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
-import java.time.Duration;
-
 public class LoginPageTest {
-    private WebDriver driver;
-
     private static final String WHITE_COLOR = "#ffffff";
     private static final String BLUE_COLOR = "#1979c3";
     private static final String LIGHT_BLUE_COLOR = "#006bb4";
     private static final String BROWN_COLOR = "#6f4400";
     private static final String LIGHT_PINK_COLOR = "#fdf0d5";
+    private static final String ACCOUNT_PAGE_URL = "https://magento.softwaretestingboard.com/customer/account/";
+    private WebDriver driver;
 
     @BeforeClass
     public void setUp() {
         driver = WebDriverUtils.createWebDriver();
+        driver.get(ACCOUNT_PAGE_URL + "login/");
     }
 
     @Test
@@ -57,7 +55,7 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.isTextForgotYourPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkText()).isEqualTo("Forgot Your Password?");
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkTextColorAsHex()).isEqualTo(LIGHT_BLUE_COLOR);
-        softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/forgotpassword/");
+        softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo(ACCOUNT_PAGE_URL + "forgotpassword/");
         softAssertions.assertAll();
     }
 
@@ -90,7 +88,7 @@ public class LoginPageTest {
                 isEqualTo("Creating an account has many benefits: check out faster, keep more than one address, track orders and more.");
         softAssertions.assertThat(loginPage.isCreateAccountButtonEnabled()).isTrue();
         softAssertions.assertThat(loginPage.getCreateAccountButtonText()).isEqualTo("Create an Account");
-        softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo("https://magento.softwaretestingboard.com/customer/account/create/");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo(ACCOUNT_PAGE_URL + "create/");
         softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
         softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
         softAssertions.assertAll();

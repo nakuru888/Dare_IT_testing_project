@@ -1,20 +1,15 @@
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.Homepage;
 import pages.LoginPage;
-import utils.WaitUtils;
 import utils.WebDriverUtils;
 
-import java.time.Duration;
-
 public class LoginFormTest {
-
     private static final String INCORRECT_CAPTCHA_ERROR_MESSAGE = "Incorrect CAPTCHA";
     private static final String ERROR_MESSAGE_REQUIRED_FIELD = "This is a required field.";
     private WebDriver driver;
