@@ -3,7 +3,6 @@ This is an ongoing learning and practice project written under the guidance of m
 It is based on a simple Automated UI testing framework for Magento page (https://magento.softwaretestingboard.com/).
 
 # Used technologies
-
 * Code: Java 17
 * Frameworks: Selenium, TestNG 
 * Library: AssertJ 
