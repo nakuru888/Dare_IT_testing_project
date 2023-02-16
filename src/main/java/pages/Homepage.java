@@ -275,4 +275,4 @@ public class Homepage {
     public List<WebElement> getHotSellersProductsList() {
         return driver.findElements(hotSellersProductsList);
     }
-}
+   }
