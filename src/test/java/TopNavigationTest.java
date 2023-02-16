@@ -40,7 +40,6 @@ public class TopNavigationTest {
 
     @DataProvider
     public Object[][] secondCategoriesLevelWithExpectedNamesAndLinks() {
-        topCategoriesList = topNavigation.getTopCategoriesList();
 
         return new Object[][]{
                 {topCategoriesList.get(1), List.of("Tops", "Bottoms"), List.of("women/tops-women.html", "women/bottoms-women.html")},
@@ -64,8 +63,7 @@ public class TopNavigationTest {
 
     @DataProvider
     public Object[][] thirdCategoriesLevelWithExpectedNamesAndLinksWomenTops() {
-        topCategoriesList = topNavigation.getTopCategoriesList();
-
+       
         return new Object[][]{
                 {topCategoriesList.get(1), 1, List.of("Jackets", "Hoodies & Sweatshirts", "Tees", "Bras & Tanks"), List.of("women/tops-women/jackets-women.html",
                         "women/tops-women/hoodies-and-sweatshirts-women.html", "women/tops-women/tees-women.html", "women/tops-women/tanks-women.html")},
