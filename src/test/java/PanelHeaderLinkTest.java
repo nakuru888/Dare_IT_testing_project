@@ -9,8 +9,9 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
+import static pageUrl.PageUrl.HOMEPAGE_URL;
+
 public class PanelHeaderLinkTest {
-    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
     private WebDriver driver;
 
     @BeforeClass

@@ -14,10 +14,10 @@ import utils.WebDriverUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopNavigationTest {
-    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
+import static pageUrl.PageUrl.HOMEPAGE_URL;
 
-    private WebDriver driver;
+public class TopNavigationTest {
+      private WebDriver driver;
     private TopNavigation topNavigation;
     private List<WebElement> topCategoriesList;
 

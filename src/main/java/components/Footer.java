@@ -11,10 +11,11 @@ import static utils.ColorUtils.getColorAsHex;
 
 public class Footer {
     private final By footerList = By.cssSelector(".footer.content ul.footer.links li");
-    private final By footerWebsiteInformation = By.cssSelector("footer+div");
+    private final By footerWebsiteInformation = By.cssSelector("footer + div");
     private final By subscribeButton = By.cssSelector(".actions .action.subscribe.primary");
     private final By enterEmailInput = By.cssSelector(".field.newsletter #newsletter");
     private final By subscribeFormField = By.cssSelector(".form.subscribe");
+    private final By copyrightSection = By.className("copyright");
     private final WebDriver driver;
 
     public Footer(WebDriver driver) {
@@ -49,8 +50,16 @@ public class Footer {
         return driver.findElement(enterEmailInput).getAttribute("placeholder");
     }
 
-    public boolean isSubscribeFormFieldDisplayed(){
-        return  driver.findElement(subscribeFormField).isDisplayed();
+    public boolean isSubscribeFormFieldDisplayed() {
+        return driver.findElement(subscribeFormField).isDisplayed();
+    }
+
+    public boolean isCopyrightInformationDisplayed() {
+        return driver.findElement(copyrightSection).isDisplayed();
+    }
+
+    public String getFooterCopyrightInformationText() {
+        return driver.findElement(copyrightSection).getText();
     }
 }
 
