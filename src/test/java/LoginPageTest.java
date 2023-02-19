@@ -7,13 +7,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
+import static colors.ColorsHex.*;
+import static page.url.PageUrl.ACCOUNT_PAGE_URL;
+
 public class LoginPageTest {
-    private static final String WHITE_COLOR = "#ffffff";
-    private static final String BLUE_COLOR = "#1979c3";
-    private static final String LIGHT_BLUE_COLOR = "#006bb4";
-    private static final String BROWN_COLOR = "#6f4400";
-    private static final String LIGHT_PINK_COLOR = "#fdf0d5";
-    private static final String ACCOUNT_PAGE_URL = "https://magento.softwaretestingboard.com/customer/account/";
     private WebDriver driver;
 
     @BeforeClass

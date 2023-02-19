@@ -1,5 +1,5 @@
 package enums;
 
 public enum Attribute {
-    HREF, SRC
+    HREF, SRC, PLACEHOLDER
 }

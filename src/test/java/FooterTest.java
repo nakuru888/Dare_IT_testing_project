@@ -13,10 +13,13 @@ import utils.WebDriverUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pageUrl.PageUrl.HOMEPAGE_URL;
+import static colors.ColorsHex.BLUE_COLOR;
+import static colors.ColorsHex.WHITE_COLOR;
+import static page.url.PageUrl.HOMEPAGE_URL;
+import static page.url.PageUrl.TESTING_BOARD_URL;
 
 public class FooterTest {
-    private static final String TESTING_BOARD_URL = "https://softwaretestingboard.com/";
+    private final By footerList = By.cssSelector("a");
 
     private WebDriver driver;
     private Footer footer;
@@ -39,7 +42,7 @@ public class FooterTest {
                 HOMEPAGE_URL + "about-us", HOMEPAGE_URL + "customer-service", TESTING_BOARD_URL + "q2a/ask", TESTING_BOARD_URL + "write-for-us/",
                 HOMEPAGE_URL + "search/term/popular/", HOMEPAGE_URL + "privacy-policy-cookie-restriction-mode/", HOMEPAGE_URL + "catalogsearch/advanced/",
                 HOMEPAGE_URL + "sales/guest/form/");
-        validateFooterCategoriesAndFooterNamesAndLinks(footerCategoriesList, expectedNamesList, expectedLinkList);
+        validateFooterCategoriesNamesAndLinks(footerCategoriesList, expectedNamesList, expectedLinkList);
     }
 
     @Test
@@ -50,8 +53,8 @@ public class FooterTest {
         softAssertions.assertThat(footer.isSubscribeButtonEnabled()).isTrue();
         softAssertions.assertThat(footer.getSubscribeButtonText()).isEqualTo("Subscribe");
         softAssertions.assertThat(footer.getEnterYourEmailPlaceHolderText()).isEqualTo("Enter your email address");
-        softAssertions.assertThat(footer.getSubscribeButtonFontColorAsHex()).isEqualTo("#ffffff");
-        softAssertions.assertThat(footer.getSubscribeButtonBackgroundColorAsHex()).isEqualTo("#1979c3");
+        softAssertions.assertThat(footer.getSubscribeButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
+        softAssertions.assertThat(footer.getSubscribeButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
         softAssertions.assertAll();
     }
 
@@ -68,27 +71,27 @@ public class FooterTest {
 
     @Test
     public void footer_FooterCopyrightSection_HasTextCorrectlyDisplayed() {
+        Assertions.assertThat(footer.isCopyrightInformationDisplayed()).isTrue();
         Assertions.assertThat(footer.getFooterCopyrightInformationText()).isEqualTo
                 ("Copyright © 2013-present Magento, Inc. All rights reserved.");
-        Assertions.assertThat(footer.isCopyrightInformationDisplayed()).isTrue();
     }
 
-    public void validateFooterCategoriesAndFooterNamesAndLinks(List<WebElement> footerCategoriesList, List<String> expectedNamesList,
+    public void validateFooterCategoriesNamesAndLinks(List<WebElement> footerCategoriesList, List<String> expectedFooterCategoriesNamesList,
                                                       List<String> expectedCategoriesLinks) {
 
         List<String> actualCategoriesNames = new ArrayList<>();
         List<String> actualCategoriesLinks = new ArrayList<>();
 
         for (WebElement category : footerCategoriesList) {
-            WebElement categoryName = category.findElement(By.cssSelector(".footer.content ul.footer.links a"));
+            WebElement categoryName = category.findElement(footerList);
             Assertions.assertThat(categoryName.isDisplayed()).isTrue();
             actualCategoriesNames.add(categoryName.getText());
-            WebElement categoryLink = category.findElement(By.cssSelector(".footer.content ul.footer.links a"));
+            WebElement categoryLink = category.findElement(footerList);
             Assertions.assertThat(categoryLink.isEnabled()).isTrue();
             actualCategoriesLinks.add(categoryLink.getAttribute(Attribute.HREF.name()));
         }
 
-        Assertions.assertThat(actualCategoriesNames).hasSameElementsAs(expectedNamesList);
+        Assertions.assertThat(actualCategoriesNames).hasSameElementsAs(expectedFooterCategoriesNamesList);
         Assertions.assertThat(actualCategoriesLinks).hasSameElementsAs(expectedCategoriesLinks);
     }
 

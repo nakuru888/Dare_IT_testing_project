@@ -9,7 +9,7 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
-import static pageUrl.PageUrl.HOMEPAGE_URL;
+import static page.url.PageUrl.HOMEPAGE_URL;
 
 public class PanelHeaderLinkTest {
     private WebDriver driver;
@@ -20,7 +20,8 @@ public class PanelHeaderLinkTest {
     }
 
     @BeforeMethod
-    public void beforeMethod() {driver.get(HOMEPAGE_URL);
+    public void beforeMethod() {
+        driver.get(HOMEPAGE_URL);
     }
 
     @Test
@@ -50,7 +51,7 @@ public class PanelHeaderLinkTest {
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 }

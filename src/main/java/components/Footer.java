@@ -1,5 +1,6 @@
 package components;
 
+import enums.Attribute;
 import enums.CssProperty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +48,7 @@ public class Footer {
     }
 
     public String getEnterYourEmailPlaceHolderText() {
-        return driver.findElement(enterEmailInput).getAttribute("placeholder");
+        return driver.findElement(enterEmailInput).getAttribute(Attribute.PLACEHOLDER.name());
     }
 
     public boolean isSubscribeFormFieldDisplayed() {
