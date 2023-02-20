@@ -11,7 +11,7 @@ import java.util.List;
 import static utils.ColorUtils.getColorAsHex;
 
 public class Footer {
-    private final By footerList = By.cssSelector(".footer.content ul.footer.links li");
+    private final By footerList = By.cssSelector(".footer.content ul.footer.links li a");
     private final By footerWebsiteInformation = By.cssSelector("footer + div");
     private final By subscribeButton = By.cssSelector(".actions .action.subscribe.primary");
     private final By enterEmailInput = By.cssSelector(".field.newsletter #newsletter");

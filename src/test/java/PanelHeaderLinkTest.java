@@ -9,7 +9,7 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
-import static page.url.PageUrl.HOMEPAGE_URL;
+import static page.url.PageUrl.*;
 
 public class PanelHeaderLinkTest {
     private WebDriver driver;
@@ -33,7 +33,7 @@ public class PanelHeaderLinkTest {
         LoginPage loginPage = homepage.openLoginPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/login/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(LOGIN_PAGE_URL);
         Assertions.assertThat(loginPage.getPageTitle()).isEqualTo("Customer Login");
     }
 
@@ -46,7 +46,7 @@ public class PanelHeaderLinkTest {
         CreateAccountPage createAccountPage = homepage.openCreateAccountPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/create/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(CREATE_AN_ACCOUNT_URL);
         Assertions.assertThat(createAccountPage.getPageTitle()).isEqualTo("Create New Customer Account");
     }
 

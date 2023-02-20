@@ -9,7 +9,7 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
-import static page.url.PageUrl.LOGIN_URL;
+import static page.url.PageUrl.LOGIN_PAGE_URL;
 
 public class LoginFormTest {
     private static final String INCORRECT_CAPTCHA_ERROR_MESSAGE = "Incorrect CAPTCHA";
@@ -24,7 +24,7 @@ public class LoginFormTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get(LOGIN_URL);
+        driver.get(LOGIN_PAGE_URL);
         loginPage = new LoginPage(driver);
     }
 

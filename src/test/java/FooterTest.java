@@ -2,7 +2,6 @@ import components.Footer;
 import enums.Attribute;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
@@ -16,11 +15,9 @@ import java.util.List;
 import static colors.ColorsHex.BLUE_COLOR;
 import static colors.ColorsHex.WHITE_COLOR;
 import static page.url.PageUrl.HOMEPAGE_URL;
-import static page.url.PageUrl.TESTING_BOARD_URL;
+import static page.url.PageUrl.SOFTWARE_TESTING_BOARD_PAGE_URL;
 
 public class FooterTest {
-    private final By footerList = By.cssSelector("a");
-
     private WebDriver driver;
     private Footer footer;
     private List<WebElement> footerCategoriesList;
@@ -38,8 +35,8 @@ public class FooterTest {
         //then
         List<String> expectedNamesList = List.of("More websites for practice", "About us", "Customer Service", "Ask a question", "Write for Us",
                 "Search Terms", "Privacy and Cookie Policy", "Advanced Search", "Orders and Returns");
-        List<String> expectedLinkList = List.of(TESTING_BOARD_URL + "q2a/4516/can-you-recommend-website-to-practice-selenium?show=4517#a4517",
-                HOMEPAGE_URL + "about-us", HOMEPAGE_URL + "customer-service", TESTING_BOARD_URL + "q2a/ask", TESTING_BOARD_URL + "write-for-us/",
+        List<String> expectedLinkList = List.of(SOFTWARE_TESTING_BOARD_PAGE_URL + "q2a/4516/can-you-recommend-website-to-practice-selenium?show=4517#a4517",
+                HOMEPAGE_URL + "about-us", HOMEPAGE_URL + "customer-service", SOFTWARE_TESTING_BOARD_PAGE_URL + "q2a/ask", SOFTWARE_TESTING_BOARD_PAGE_URL + "write-for-us/",
                 HOMEPAGE_URL + "search/term/popular/", HOMEPAGE_URL + "privacy-policy-cookie-restriction-mode/", HOMEPAGE_URL + "catalogsearch/advanced/",
                 HOMEPAGE_URL + "sales/guest/form/");
         validateFooterCategoriesNamesAndLinks(footerCategoriesList, expectedNamesList, expectedLinkList);
@@ -83,12 +80,10 @@ public class FooterTest {
         List<String> actualCategoriesLinks = new ArrayList<>();
 
         for (WebElement category : footerCategoriesList) {
-            WebElement categoryName = category.findElement(footerList);
-            Assertions.assertThat(categoryName.isDisplayed()).isTrue();
-            actualCategoriesNames.add(categoryName.getText());
-            WebElement categoryLink = category.findElement(footerList);
-            Assertions.assertThat(categoryLink.isEnabled()).isTrue();
-            actualCategoriesLinks.add(categoryLink.getAttribute(Attribute.HREF.name()));
+            Assertions.assertThat(category.isDisplayed()).isTrue();
+            actualCategoriesNames.add(category.getText());
+            Assertions.assertThat(category.isEnabled()).isTrue();
+            actualCategoriesLinks.add(category.getAttribute(Attribute.HREF.name()));
         }
 
         Assertions.assertThat(actualCategoriesNames).hasSameElementsAs(expectedFooterCategoriesNamesList);

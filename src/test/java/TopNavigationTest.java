@@ -14,7 +14,7 @@ import utils.WebDriverUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static page.url.PageUrl.HOMEPAGE_URL;
+import static page.url.PageUrl.*;
 
 public class TopNavigationTest {
     private WebDriver driver;
