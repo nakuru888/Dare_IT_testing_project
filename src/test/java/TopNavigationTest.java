@@ -14,9 +14,9 @@ import utils.WebDriverUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopNavigationTest {
-    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
+import static page.url.PageUrl.*;
 
+public class TopNavigationTest {
     private WebDriver driver;
     private TopNavigation topNavigation;
     private List<WebElement> topCategoriesList;
@@ -62,8 +62,8 @@ public class TopNavigationTest {
     }
 
     @DataProvider
-    public Object[][] thirdCategoriesLevelWithExpectedNamesAndLinksWomenTops() {
-       
+    public Object[][] thirdCategoriesLevelWithExpectedNamesAndLinks() {
+
         return new Object[][]{
                 {topCategoriesList.get(1), 1, List.of("Jackets", "Hoodies & Sweatshirts", "Tees", "Bras & Tanks"), List.of("women/tops-women/jackets-women.html",
                         "women/tops-women/hoodies-and-sweatshirts-women.html", "women/tops-women/tees-women.html", "women/tops-women/tanks-women.html")},
@@ -74,7 +74,7 @@ public class TopNavigationTest {
         };
     }
 
-    @Test(dataProvider = "thirdCategoriesLevelWithExpectedNamesAndLinksWomenTops")
+    @Test(dataProvider = "thirdCategoriesLevelWithExpectedNamesAndLinks")
     public void topNavigation_ThirdLevelCategories_CorrectlyDisplayed(WebElement topCategory, Integer secondCategoryLevelChildNumber,
                                                                       List<String> expectedCategoriesNames, List<String> expectedCategoriesLinks) {
         //given

@@ -9,11 +9,12 @@ import utils.WebDriverUtils;
 
 import java.util.List;
 
+import static colors.ColorsHex.BLUE_COLOR;
+import static colors.ColorsHex.WHITE_COLOR;
+import static page.url.PageUrl.HOMEPAGE_URL;
+
 public class
 HomepageTest {
-    private static final String WHITE_COLOR = "#ffffff";
-    private static final String BLUE_COLOR = "#1979c3";
-    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
     private WebDriver driver;
     private Homepage homepage;
 

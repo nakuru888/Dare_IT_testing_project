@@ -7,19 +7,16 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
+import static colors.ColorsHex.*;
+import static page.url.PageUrl.*;
+
 public class LoginPageTest {
-    private static final String WHITE_COLOR = "#ffffff";
-    private static final String BLUE_COLOR = "#1979c3";
-    private static final String LIGHT_BLUE_COLOR = "#006bb4";
-    private static final String BROWN_COLOR = "#6f4400";
-    private static final String LIGHT_PINK_COLOR = "#fdf0d5";
-    private static final String ACCOUNT_PAGE_URL = "https://magento.softwaretestingboard.com/customer/account/";
     private WebDriver driver;
 
     @BeforeClass
     public void setUp() {
         driver = WebDriverUtils.createWebDriver();
-        driver.get(ACCOUNT_PAGE_URL + "login/");
+        driver.get(LOGIN_PAGE_URL);
     }
 
     @Test
@@ -55,7 +52,7 @@ public class LoginPageTest {
         softAssertions.assertThat(loginPage.isTextForgotYourPasswordDisplayed()).isTrue();
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkText()).isEqualTo("Forgot Your Password?");
         softAssertions.assertThat(loginPage.getForgotYourPasswordLinkTextColorAsHex()).isEqualTo(LIGHT_BLUE_COLOR);
-        softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo(ACCOUNT_PAGE_URL + "forgotpassword/");
+        softAssertions.assertThat(loginPage.getForgotYourPasswordLink()).isEqualTo(FORGOT_PASSWORD_PAGE_URL);
         softAssertions.assertAll();
     }
 
@@ -88,7 +85,7 @@ public class LoginPageTest {
                 isEqualTo("Creating an account has many benefits: check out faster, keep more than one address, track orders and more.");
         softAssertions.assertThat(loginPage.isCreateAccountButtonEnabled()).isTrue();
         softAssertions.assertThat(loginPage.getCreateAccountButtonText()).isEqualTo("Create an Account");
-        softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo(ACCOUNT_PAGE_URL + "create/");
+        softAssertions.assertThat(loginPage.getCreateAccountButtonLink()).isEqualTo(CREATE_AN_ACCOUNT_URL);
         softAssertions.assertThat(loginPage.getCreateAccountButtonFontColorAsHex()).isEqualTo(WHITE_COLOR);
         softAssertions.assertThat(loginPage.getCreateAccountButtonBackgroundColorAsHex()).isEqualTo(BLUE_COLOR);
         softAssertions.assertAll();

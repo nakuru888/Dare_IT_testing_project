@@ -9,8 +9,9 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
+import static page.url.PageUrl.*;
+
 public class PanelHeaderLinkTest {
-    private static final String HOMEPAGE_URL = "https://magento.softwaretestingboard.com/";
     private WebDriver driver;
 
     @BeforeClass
@@ -19,7 +20,8 @@ public class PanelHeaderLinkTest {
     }
 
     @BeforeMethod
-    public void beforeMethod() {driver.get(HOMEPAGE_URL);
+    public void beforeMethod() {
+        driver.get(HOMEPAGE_URL);
     }
 
     @Test
@@ -31,7 +33,7 @@ public class PanelHeaderLinkTest {
         LoginPage loginPage = homepage.openLoginPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/login/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(LOGIN_PAGE_URL);
         Assertions.assertThat(loginPage.getPageTitle()).isEqualTo("Customer Login");
     }
 
@@ -44,12 +46,12 @@ public class PanelHeaderLinkTest {
         CreateAccountPage createAccountPage = homepage.openCreateAccountPage();
 
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(HOMEPAGE_URL + "customer/account/create/");
+        Assertions.assertThat(driver.getCurrentUrl()).contains(CREATE_AN_ACCOUNT_URL);
         Assertions.assertThat(createAccountPage.getPageTitle()).isEqualTo("Create New Customer Account");
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 }

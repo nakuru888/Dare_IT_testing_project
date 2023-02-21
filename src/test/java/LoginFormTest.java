@@ -9,6 +9,8 @@ import pages.Homepage;
 import pages.LoginPage;
 import utils.WebDriverUtils;
 
+import static page.url.PageUrl.LOGIN_PAGE_URL;
+
 public class LoginFormTest {
     private static final String INCORRECT_CAPTCHA_ERROR_MESSAGE = "Incorrect CAPTCHA";
     private static final String ERROR_MESSAGE_REQUIRED_FIELD = "This is a required field.";
@@ -17,12 +19,12 @@ public class LoginFormTest {
 
     @BeforeClass
     public void setUp() {
-        driver= WebDriverUtils.createWebDriver();
+        driver = WebDriverUtils.createWebDriver();
     }
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://magento.softwaretestingboard.com/customer/account/login/");
+        driver.get(LOGIN_PAGE_URL);
         loginPage = new LoginPage(driver);
     }
 

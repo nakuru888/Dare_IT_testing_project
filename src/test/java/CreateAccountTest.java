@@ -7,6 +7,7 @@ import pages.UserPanel;
 import utils.WebDriverUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static page.url.PageUrl.CREATE_AN_ACCOUNT_URL;
 import static utils.TestUtils.randomString;
 
 public class CreateAccountTest {
@@ -14,8 +15,8 @@ public class CreateAccountTest {
 
     @BeforeClass
     public void setUp() {
-       driver = WebDriverUtils.createWebDriver();
-       driver.get("https://magento.softwaretestingboard.com/customer/account/create/");
+        driver = WebDriverUtils.createWebDriver();
+        driver.get(CREATE_AN_ACCOUNT_URL);
     }
 
     @Test
