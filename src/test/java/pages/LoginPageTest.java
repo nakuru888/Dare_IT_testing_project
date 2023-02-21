@@ -1,3 +1,5 @@
+package pages;
+
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;

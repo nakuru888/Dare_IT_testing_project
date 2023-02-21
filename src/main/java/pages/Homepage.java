@@ -13,12 +13,10 @@ import static utils.WaitUtils.waitUntilElementContainsText;
 import static utils.WaitUtils.waitUntilElementsIsPresented;
 
 public class Homepage {
+    private final By welcomeText = By.className("logged-in");
     public static final By HOT_SELLERS_PRODUCT_IMAGE = By.className("product-image-photo");
     public static final By HOT_SELLERS_PRODUCT_DETAILS = By.className("product-item-details");
     public static final By HOT_SELLERS_PRODUCT_TITLE = By.className("product-item-name");
-    private final By createAccountHeaderLink = By.cssSelector(".panel.header .header.links li:last-child");
-    private final By signInHeaderLink = By.cssSelector(".header.links .authorization-link");
-    private final By welcomeText = By.className("logged-in");
     private final By mainBannerTopText = By.cssSelector(".blocks-promo .home-main .info");
     private final By mainBannerMainText = By.cssSelector(".blocks-promo .home-main .title");
     private final By mainBannerButton = By.cssSelector(".action.more.button");
@@ -60,24 +58,14 @@ public class Homepage {
         this.driver = driver;
     }
 
-    public CreateAccountPage openCreateAccountPage() {
-        driver.findElement(createAccountHeaderLink).click();
-        return new CreateAccountPage(driver);
-    }
-
-    public LoginPage openLoginPage() {
-        driver.findElement(signInHeaderLink).click();
-        return new LoginPage(driver);
+    public String getMainBannerTopText() {
+        waitUntilMainBannerIsDisplayed();
+        return driver.findElement(mainBannerTopText).getText();
     }
 
     public String getWelcomeText() {
         waitUntilElementContainsText(driver, welcomeText, "Welcome");
         return driver.findElement(welcomeText).getText();
-    }
-
-    public String getMainBannerTopText() {
-        waitUntilMainBannerIsDisplayed();
-        return driver.findElement(mainBannerTopText).getText();
     }
 
     public String getMainBannerMainText() {
@@ -275,4 +263,4 @@ public class Homepage {
     public List<WebElement> getHotSellersProductsList() {
         return driver.findElements(hotSellersProductsList);
     }
-   }
+}

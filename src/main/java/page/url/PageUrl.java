@@ -6,5 +6,5 @@ public class PageUrl {
     public static final String LOGIN_PAGE_URL = HOMEPAGE_URL + "customer/account/login";
     public static final String FORGOT_PASSWORD_PAGE_URL = HOMEPAGE_URL + "customer/account/forgotpassword/";
     public static final String SOFTWARE_TESTING_BOARD_PAGE_URL = "https://softwaretestingboard.com/";
-
+    public static final String SHOPPING_CART_URL = "https://magento.softwaretestingboard.com/checkout/cart/";
 }

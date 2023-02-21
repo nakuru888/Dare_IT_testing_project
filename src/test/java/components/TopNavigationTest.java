@@ -1,3 +1,5 @@
+package components;
+
 import components.TopNavigation;
 import enums.Attribute;
 import org.assertj.core.api.Assertions;
