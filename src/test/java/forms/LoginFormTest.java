@@ -1,3 +1,5 @@
+package forms;
+
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

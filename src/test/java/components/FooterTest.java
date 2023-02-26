@@ -1,3 +1,5 @@
+package components;
+
 import components.Footer;
 import enums.Attribute;
 import org.assertj.core.api.Assertions;
