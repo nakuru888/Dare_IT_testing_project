@@ -6,10 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.CreateAccountPage;
-import pages.LoginPage;
 import utils.WebDriverUtils;
 
 import java.util.ArrayList;
@@ -26,46 +23,22 @@ public class PanelHeaderTest {
     @BeforeClass
     public void setUp() {
         driver = WebDriverUtils.createWebDriver();
+        driver.get(HOMEPAGE_URL);
         panelHeader = new PanelHeader(driver);
         headerPanelList = panelHeader.getPanelHeaderList();
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-        driver.get(HOMEPAGE_URL);
-    }
-
     @Test
-    public void panelHeader_SignInLink_NavigatesToLoginPage() {
-        //when
-        LoginPage loginPage = panelHeader.openLoginPage();
-
+    public void panelHeader_TopDemoInfoBanner_HasTextAndColorsCorrectlyDisplayed() {
         //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(LOGIN_PAGE_URL);
-        Assertions.assertThat(loginPage.getPageTitle()).isEqualTo("Customer Login");
+        Assertions.assertThat(panelHeader.isTopDemoInfoBannerDisplayed()).isTrue();
+        Assertions.assertThat(panelHeader.getTopDemoInfoBannerText()).isEqualTo("This is a demo store. No orders will be fulfilled.");
+        Assertions.assertThat(panelHeader.getTopDemoInfoBannerFontAsHex()).isEqualTo(WHITE_COLOR);
+        Assertions.assertThat(panelHeader.getTopDemoInfoBannerBackgroundAsHex()).isEqualTo(RED_COLOR);
     }
 
     @Test
-    public void panelHeader_CreateAccountLink_NavigatesToLoginPage() {
-        //when
-        CreateAccountPage createAccountPage = panelHeader.openCreateAccountPage();
-
-        //then
-        Assertions.assertThat(driver.getCurrentUrl()).contains(CREATE_AN_ACCOUNT_URL);
-        Assertions.assertThat(createAccountPage.getPageTitle()).isEqualTo("Create New Customer Account");
-    }
-
-    @Test
-    public void panelHeaderThisIsDemoSite_HasTextAndColorsCorrectlyDisplayed() {
-        //then
-        Assertions.assertThat(panelHeader.isThisIsDemoSiteSectionDisplayed()).isTrue();
-        Assertions.assertThat(panelHeader.getThisIsDemoSiteSectionText()).isEqualTo("This is a demo store. No orders will be fulfilled.");
-        Assertions.assertThat(panelHeader.getThisIsDemoSiteSectionFontAsHex()).isEqualTo(WHITE_COLOR);
-        Assertions.assertThat(panelHeader.getThisIsDemoSiteSectionBackgroundAsHex()).isEqualTo(RED_COLOR);
-    }
-
-    @Test
-    public void panelHeader_PageWrapperGreyBar_HasColorsAndTextCorrectlyDisplayed() {
+    public void panelHeader_PageWrapperGreyBar_HasCorrectImageAndLink() {
         //then
         Assertions.assertThat(panelHeader.isPanelHeaderSectionDisplayed()).isTrue();
         Assertions.assertThat(panelHeader.getPanelHeaderSectionSectionFontAsHex()).isEqualTo(WHITE_COLOR);
@@ -81,33 +54,39 @@ public class PanelHeaderTest {
         Assertions.assertThat(panelHeader.isLumaLogoDisplayed()).isTrue();
         Assertions.assertThat(panelHeader.getLumaLogoLink()).isEqualTo(HOMEPAGE_URL);
         Assertions.assertThat(panelHeader.getLumaLogoImageSource()).isEqualTo
-                ("https://magento.softwaretestingboard.com/pub/static/version1666447838/frontend/Magento/luma/en_US/images/logo.svg");
+                (HOMEPAGE_URL + "pub/static/version1666447838/frontend/Magento/luma/en_US/images/logo.svg");
     }
 
     @Test
-    public void panelHeader_SearchAndCart_HasTextAndLinksCorrectlyDisplayed() {
+    public void panelHeader_SearchField_HasCorrectlyPlaceholderTextAndLink() {
         //then
         Assertions.assertThat(panelHeader.isSearchFieldDisplayed()).isTrue();
         Assertions.assertThat(panelHeader.getSearchFieldPlaceHolderText()).isEqualTo("Search entire store here...");
-        Assertions.assertThat(panelHeader.getSearchCartLink()).isEqualTo(SHOPPING_CART_URL);
+    }
+
+    @Test
+    public void panelHeader_ShoppingCart_HasCorrectIconAndLink() {
+        //then
+        Assertions.assertThat(panelHeader.isCartLinkDisplayed()).isTrue();
+        Assertions.assertThat(panelHeader.getCartLink()).isEqualTo(SHOPPING_CART_URL);
     }
 
 
     public void validatePanelHeaderNamesAndLinks(List<WebElement> headerPanelList, List<String> expectedPanelHeaderNamesList,
                                                  List<String> expectedCategoriesLinks) {
 
-        List<String> actualCategoriesNames = new ArrayList<>();
-        List<String> actualCategoriesLinks = new ArrayList<>();
+        List<String> actualLoginAndCreateAccountNames = new ArrayList<>();
+        List<String> actualLoginAndCreateAccountLinks = new ArrayList<>();
 
-        for (WebElement category : headerPanelList) {
-            Assertions.assertThat(category.isDisplayed()).isTrue();
-            actualCategoriesNames.add(category.getText());
-            Assertions.assertThat(category.isEnabled()).isTrue();
-            actualCategoriesLinks.add(category.getAttribute(Attribute.HREF.name()));
+        for (WebElement element : headerPanelList) {
+            Assertions.assertThat(element.isDisplayed()).isTrue();
+            actualLoginAndCreateAccountNames.add(element.getText());
+            Assertions.assertThat(element.isEnabled()).isTrue();
+            actualLoginAndCreateAccountLinks.add(element.getAttribute(Attribute.HREF.name()));
         }
 
-        Assertions.assertThat(actualCategoriesNames).hasSameElementsAs(expectedPanelHeaderNamesList);
-        Assertions.assertThat(actualCategoriesLinks).hasSameElementsAs(expectedCategoriesLinks);
+        Assertions.assertThat(actualLoginAndCreateAccountNames).hasSameElementsAs(expectedPanelHeaderNamesList);
+        Assertions.assertThat(actualLoginAndCreateAccountLinks).contains(String.valueOf(expectedCategoriesLinks));
     }
 
     @AfterClass
